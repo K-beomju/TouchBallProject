@@ -26,6 +26,7 @@ public class Ball : MonoBehaviour
                 if(isStart)
                 {
                     isStart = false;
+                    press.gameObject.SetActive(true);
                     rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 }
                 rb.velocity = new Vector2(0, 5);
@@ -37,7 +38,7 @@ public class Ball : MonoBehaviour
     {
         if(!isStart)
         transform.Translate(Vector2.right * (speed * Time.deltaTime));
-        cameraRs.LockScreenCamera(this.transform.position);
+        cameraRs.OutScreenBall(transform.position);
     }
 
     private void OnCollisionEnter2D(Collision2D other)

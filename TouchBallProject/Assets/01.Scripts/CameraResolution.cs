@@ -28,15 +28,13 @@ public class CameraResolution : MonoBehaviour
         mainCam.rect = rect;
     }
 
-    public void LockScreenCamera(Vector3 lockPos)
+    public bool OutScreenBall(Vector3 lockPos)
     {
         Vector3 pos = mainCam.WorldToViewportPoint(lockPos);
-
-        if (pos.x < 0f) pos.x = 0f;
-        if (pos.x > 1f)pos.x = 1f;
-        if (pos.y > 1f) pos.y = 1f;
-        if (pos.y < 0f) pos.y = 0f;
-
-        lockPos = Camera.main.ViewportToWorldPoint(pos);
+        if (pos.x < 0f || pos.x > 1f || pos.y > 1f || pos.y < 0f) 
+        {
+            return true;
+        }
+        return false;
     }
 }
