@@ -30,6 +30,7 @@ public class Ball : MonoBehaviour
                     isStart = false;
                     press.gameObject.SetActive(true);
                     rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    UiManager.Instance.GameStartUI();
                 }
                 rb.velocity = new Vector2(0, 5);
             }
