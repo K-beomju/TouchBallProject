@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 public class Ball : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private GameObject dieEffect;
+
     [SerializeField] private CameraResolution cameraRs;
     [SerializeField] private Press press;
 
@@ -38,7 +40,12 @@ public class Ball : MonoBehaviour
     {
         if(!isStart)
         transform.Translate(Vector2.right * (speed * Time.deltaTime));
-        cameraRs.OutScreenBall(transform.position);
+        
+        if(cameraRs.OutScreenBall(transform.position))
+        {
+            gameObject.SetActive(false);
+            Instantiate(dieEffect, transform.position, Quaternion.identity);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
