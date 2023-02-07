@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class ScoreTextGroup : MonoBehaviour
+public class CurrentScoreGroup : MonoBehaviour
 {
-
     [SerializeField] private Text currentScoreText;
 
     private CanvasGroup canvasGroup;
@@ -20,9 +19,9 @@ public class ScoreTextGroup : MonoBehaviour
         rtm = GetComponent<RectTransform>();
     }
 
-    public void ShowCurrentScore(int score)
+    public void ShowCurrentScore(int currentScore)
     {
-        currentScoreText.text = score.ToString();
+        currentScoreText.text = currentScore.ToString();
     }
 
     public void GameOverDirect()

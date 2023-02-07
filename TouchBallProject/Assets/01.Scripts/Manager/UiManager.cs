@@ -6,16 +6,22 @@ using DG.Tweening;
 
 public class UiManager : MonoSingleton<UiManager>
 {
-    public ScoreTextGroup scoreTextGroup;
+    public CurrentScoreGroup currentScore;
+    public BestScoreGroup bestScore;
+
+    protected override void Start()
+    {
+        bestScore.ShowBestScore();
+    }
 
     public void GameStartUI()
     {
-        scoreTextGroup.gameObject.SetActive(true);
+        currentScore.gameObject.SetActive(true);
     }
 
     public void GameOverUI()
     {
-        scoreTextGroup.GameOverDirect();
+        currentScore.GameOverDirect();
     }
 
 }

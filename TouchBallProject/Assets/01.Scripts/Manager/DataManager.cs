@@ -11,7 +11,7 @@ public class DataManager : MonoSingleton<DataManager>
         set
         {
             _currentScore = value;
-            UiManager.Instance.scoreTextGroup.ShowCurrentScore(value);
+            UiManager.Instance.currentScore.ShowCurrentScore(value);
         }
     }
 
@@ -28,5 +28,22 @@ public class DataManager : MonoSingleton<DataManager>
     public void CurrentAddScore()
     {
         CurrentScore++;
+    }
+
+    public void UpdateBestScore()
+    {
+        if(SecurityPlayerPrefs.HasKey("bestScore"))
+        {
+            if(CurrentScore > SecurityPlayerPrefs.GetInt("bestScore", default))
+            {
+                BestScore = CurrentScore;
+                SecurityPlayerPrefs.SetInt("bestScore", BestScore);
+            }
+        }
+        else
+        {
+            BestScore = CurrentScore;
+            SecurityPlayerPrefs.SetInt("bestScore", BestScore);
+        }
     }
 }

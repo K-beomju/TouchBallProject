@@ -46,8 +46,9 @@ public class Ball : MonoBehaviour
         {
             gameObject.SetActive(false);
             Instantiate(dieEffect, transform.position, Quaternion.identity);
-            UiManager.Instance.GameOverUI();
             press.GameOverDirect();
+            UiManager.Instance.GameOverUI();
+            DataManager.Instance.UpdateBestScore();
         }
     }
 
