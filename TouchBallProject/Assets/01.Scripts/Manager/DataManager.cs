@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class DataManager : MonoSingleton<DataManager>
 {
-    private UiManager uiManager;
-
-
     private int _currentScore;
     public int CurrentScore
     {
@@ -14,7 +11,7 @@ public class DataManager : MonoSingleton<DataManager>
         set
         {
             _currentScore = value;
-            uiManager.scoreTextGroup.ShowCurrentScore(value);
+            UiManager.Instance.scoreTextGroup.ShowCurrentScore(value);
         }
     }
 
@@ -26,12 +23,6 @@ public class DataManager : MonoSingleton<DataManager>
         set => _bestScore = value;
     }
 
-
-    private void Awake()
-    {
-        if(uiManager == null)
-            uiManager = GetComponent<UiManager>();
-    }
 
 
     public void CurrentAddScore()

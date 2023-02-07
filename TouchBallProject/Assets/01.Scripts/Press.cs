@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using static UnityEngine.GraphicsBuffer;
 
 public class Press : MonoBehaviour
 {
@@ -25,7 +26,11 @@ public class Press : MonoBehaviour
             transform.position = new Vector3(targetX + (transform.position.x > 0 ? -0.5f : 0.5f), Random.Range(-4, 5), 0);
             transform.DOMoveX(targetX, 0.1f);
         });
+    }
 
+    public void GameOverDirect()
+    {
+        transform.DOMoveX(transform.position.x + (transform.position.x > 0 ? 0.5f : -0.5f), 1f);
     }
 
 }
