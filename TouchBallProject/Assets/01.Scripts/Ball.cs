@@ -54,6 +54,7 @@ public class Ball : MonoBehaviour
         {
             speed *= -1;
             press.ChangePressTransform();
+            DataManager.Instance.CurrentAddScore();
         }
     }
 
