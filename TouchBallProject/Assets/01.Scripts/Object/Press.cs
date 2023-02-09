@@ -75,8 +75,8 @@ public class Press : MonoBehaviour
 
     public void GameOverDirect()
     {
-        transform.DOMoveX(transform.position.x + (transform.position.x > 0 ? 0.3f : -0.3f), 1f);
-        goldParticle.SetActive(false);
+        transform.DOMoveX(transform.position.x + (transform.position.x > 0 ? 0.3f : -0.3f), 1f)
+        .OnComplete(() => gameObject.SetActive(false));
     }
 
 }

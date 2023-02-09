@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 public class Ball : MonoBehaviour
 {
     [SerializeField] private float dirSpeed;
-    [SerializeField] private float moveSpeed;
+    public float moveSpeed;
+    public bool isSlow = false;
     [SerializeField] private GameObject dieEffect;
 
     [SerializeField] private CameraResolution cameraRs;
@@ -56,11 +57,11 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-
-
         if (other.gameObject.CompareTag("Press"))
         {
             dirSpeed *= -1f;
+            if(!isSlow)
+            moveSpeed += 0.01f;
             press.ChangePressTransform();
 
             if (!press.isGoldPress)
@@ -73,9 +74,7 @@ public class Ball : MonoBehaviour
 
             if (DataManager.Instance.CurrentScore % 5 == 0)
             {
-                moveSpeed += 0.02f;
                 backGround.ChangeBackColor();
-
                 Handheld.Vibrate();
             }
             if (DataManager.Instance.CurrentScore % 4 == 0 && ItemManager.Instance.isSpawn)

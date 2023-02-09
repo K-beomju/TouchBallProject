@@ -12,6 +12,7 @@ public class ItemManager : MonoSingleton<ItemManager>
     [SerializeField] private GameObject pressObj;
     private Press press;
     [SerializeField] private GameObject ballObj;
+    private Ball ball;
 
     [SerializeField] private GameObject itemGroup;
     [SerializeField] private Text countText;
@@ -33,9 +34,12 @@ public class ItemManager : MonoSingleton<ItemManager>
         mainCam = Camera.main;
         itemSr = itemObj.GetComponent<SpriteRenderer>();
         press = pressObj.GetComponent<Press>();
+        ball = ballObj.GetComponent<Ball>();
 
         _itemPatterns.Add(BigPress);
         _itemPatterns.Add(GoldPress);
+        _itemPatterns.Add(SlowBall);
+
     }
 
     public void SpawnItem()
@@ -93,6 +97,22 @@ public class ItemManager : MonoSingleton<ItemManager>
             yield return null;
         }
         press.ChangeNormalPress();
+    }
+
+    private IEnumerator SlowBall()
+    {   
+        float currentSpeed = ball.moveSpeed;
+        ball.moveSpeed = 1;
+        ball.isSlow = true;
+        startTime = Time.time;
+        while (Time.time - startTime < cooldown)
+        {
+            float remainingTime = cooldown - (Time.time - startTime);
+            countText.text = remainingTime.ToString("F0") + "S";
+            yield return null;
+        }
+        ball.moveSpeed = currentSpeed;
+        ball.isSlow = false;
 
     }
 
