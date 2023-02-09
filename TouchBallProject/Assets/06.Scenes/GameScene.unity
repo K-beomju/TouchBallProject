@@ -692,9 +692,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 370c4cca2a4e64859824509f57b9d5d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a9e7f918c7c4ed40b42cac68f1687bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wireColor: {r: 1, g: 1, b: 1, a: 1}
+  UnitsSize: 10
+  constraint: 1
+  camera: {fileID: 519420031}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -890,7 +894,7 @@ MonoBehaviour:
   dirSpeed: 3
   moveSpeed: 1
   dieEffect: {fileID: 3158167954560258763, guid: 77038115acb22294388e156326291156, type: 3}
-  cameraRs: {fileID: 519420030}
+  cameraRs: {fileID: 0}
   press: {fileID: 764702715}
   backGround: {fileID: 705208142}
 --- !u!96 &591122895
@@ -1962,10 +1966,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
