@@ -9,7 +9,19 @@ public class Press : MonoBehaviour
     #region 앰비언트 연출 
     private Sequence pressAmbientSq;
     private float pressIntensity;
+
+    [SerializeField] private SpriteRenderer ambient1Sr;
+    [SerializeField] private SpriteRenderer ambient2Sr;
+    [SerializeField] private Color goldAmbient1;
+    [SerializeField] private Color goldAmbient2;
+    private Color normalAmbient1;
+    private Color normalAmbient2;
     #endregion
+
+
+    private SpriteRenderer sr;
+    public bool isGoldPress = false;
+    public GameObject goldParticle;
 
     private Camera mainCam;
 
@@ -18,7 +30,9 @@ public class Press : MonoBehaviour
         mainCam = Camera.main;
         Vector3 rightCenter = mainCam.ViewportToWorldPoint(new Vector3(1, 0.5f, mainCam.nearClipPlane));
         transform.position = rightCenter;
-
+        sr = GetComponent<SpriteRenderer>();
+        normalAmbient1 = ambient1Sr.color;
+        normalAmbient2 = ambient2Sr.color;
     }
 
     public void ChangePressTransform()
@@ -38,9 +52,31 @@ public class Press : MonoBehaviour
         });
     }
 
+    public void GoldPressItem()
+    {
+
+        isGoldPress = true;
+        sr.DOColor(Color.yellow, 0.5f);
+        ambient1Sr.color = goldAmbient1;
+        ambient2Sr.color = goldAmbient2;
+        goldParticle.SetActive(true);
+    }
+
+    public void ChangeNormalPress()
+    {
+        isGoldPress = false;
+        sr.DOColor(Color.black, 0.5f);
+        ambient1Sr.color = normalAmbient1;
+        ambient2Sr.color = normalAmbient2;
+        goldParticle.SetActive(false);
+
+    }
+
+
     public void GameOverDirect()
     {
         transform.DOMoveX(transform.position.x + (transform.position.x > 0 ? 0.3f : -0.3f), 1f);
+        goldParticle.SetActive(false);
     }
 
 }

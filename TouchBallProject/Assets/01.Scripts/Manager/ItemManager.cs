@@ -6,25 +6,36 @@ using UnityEngine.UI;
 
 public class ItemManager : MonoSingleton<ItemManager>
 {
-    [SerializeField] private GameObject item;
-    [SerializeField] private GameObject press;
-    [SerializeField] private GameObject ball;
-
+    [SerializeField] private GameObject itemObj;
     private SpriteRenderer itemSr;
+
+    [SerializeField] private GameObject pressObj;
+    private Press press;
+    [SerializeField] private GameObject ballObj;
+
+    [SerializeField] private GameObject itemGroup;
+    [SerializeField] private Text countText;
+    
     private Camera mainCam;
+
     private WaitForSeconds delay = new WaitForSeconds(10);
     private float startTime;
     private float cooldown = 10;
 
-    [SerializeField] private GameObject itemGroup;
-    [SerializeField] private Text countText;
+    private List<System.Func<IEnumerator>> _itemPatterns = new List<System.Func<IEnumerator>>();
+
+
 
     public bool isSpawn = true;
 
     private void Awake()
     {
         mainCam = Camera.main;
-        itemSr = item.GetComponent<SpriteRenderer>();
+        itemSr = itemObj.GetComponent<SpriteRenderer>();
+        press = pressObj.GetComponent<Press>();
+
+        _itemPatterns.Add(BigPress);
+        _itemPatterns.Add(GoldPress);
     }
 
     public void SpawnItem()
@@ -33,8 +44,8 @@ public class ItemManager : MonoSingleton<ItemManager>
         {
             itemSr.DOFade(0, 0);
             itemSr.DOFade(1, 1);
-            item.SetActive(true);
-            item.transform.position = RandCameraViewPosition();
+            itemObj.SetActive(true);
+            itemObj.transform.position = RandCameraViewPosition();
             isSpawn = false;
         }
     }
@@ -46,9 +57,11 @@ public class ItemManager : MonoSingleton<ItemManager>
 
         IEnumerator UseItemCo()
         {
-            // TODO
             itemGroup.SetActive(true);
-            yield return StartCoroutine(BigPress());
+            countText.text = "";
+            yield return  StartCoroutine(_itemPatterns[Random.Range(0, _itemPatterns.Count)]());
+            itemGroup.SetActive(false);
+
             yield return delay;
 
             isSpawn = true;
@@ -66,8 +79,21 @@ public class ItemManager : MonoSingleton<ItemManager>
             countText.text = remainingTime.ToString("F0") + "S";
             yield return null;
         }
-        itemGroup.SetActive(false);
         press.transform.DOScaleY(1.5f, 0.5f);
+    }
+
+    private IEnumerator GoldPress()
+    {
+        press.GoldPressItem();
+        startTime = Time.time;
+        while (Time.time - startTime < cooldown)
+        {
+            float remainingTime = cooldown - (Time.time - startTime);
+            countText.text = remainingTime.ToString("F0") + "S";
+            yield return null;
+        }
+        press.ChangeNormalPress();
+
     }
 
 

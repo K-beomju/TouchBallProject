@@ -24,11 +24,11 @@ public class CurrentScoreGroup : MonoBehaviour
         currentScoreText.text = currentScore.ToString();
     }
 
+
     public void GameOverDirect()
     {
         gameOverSq = DOTween.Sequence();
         gameOverSq.AppendInterval(1);
-        gameOverSq.Append(rtm.DOAnchorPosY(100, 2));
-        gameOverSq.Join(canvasGroup.DOFade(0, 1));
+        gameOverSq.Append(rtm.DOScale(new Vector3(1.2f,1.2f,0), 1));
     }
 }

@@ -31,5 +31,6 @@ public class HomeButton : MonoBehaviour
         sq.AppendInterval(1);
         sq.Append(rect.DOAnchorPosY(-400, 1));
         sq.Join(canvasGroup.DOFade(1,1).SetDelay(1));
+        sq.InsertCallback(3,() => canvasGroup.blocksRaycasts = true);
     }
 }

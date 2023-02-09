@@ -27,7 +27,7 @@ public class UiManager : MonoSingleton<UiManager>
         home.gameObject.SetActive(true);
         home.ShowHomeButton();
         back.GameOver();
-        //currentScore.GameOverDirect();
+        currentScore.GameOverDirect();
     }
 
 }

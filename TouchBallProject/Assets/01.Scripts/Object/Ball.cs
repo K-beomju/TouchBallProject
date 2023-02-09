@@ -27,7 +27,7 @@ public class Ball : MonoBehaviour
         {
             if (EventSystem.current.IsPointerOverGameObject() == false)
             {
-                if(isStart)
+                if (isStart)
                 {
                     isStart = false;
                     press.gameObject.SetActive(true);
@@ -41,10 +41,10 @@ public class Ball : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!isStart)
-        transform.Translate(Vector2.right * (dirSpeed * Time.deltaTime * moveSpeed));
-        
-        if(cameraRs.OutScreenBall(transform.position))
+        if (!isStart)
+            transform.Translate(Vector2.right * (dirSpeed * Time.deltaTime * moveSpeed));
+
+        if (cameraRs.OutScreenBall(transform.position))
         {
             gameObject.SetActive(false);
             Instantiate(dieEffect, transform.position, Quaternion.identity);
@@ -56,22 +56,28 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+
+
         if (other.gameObject.CompareTag("Press"))
         {
             dirSpeed *= -1f;
             press.ChangePressTransform();
-            DataManager.Instance.CurrentAddScore();
 
-
-            // 5의 배수가 될 때 점점 어려워지게 || 이벤트 아이템 
-            if(DataManager.Instance.CurrentScore % 5 == 0)
+            if (!press.isGoldPress)
+                DataManager.Instance.CurrentAddScore();
+            else
             {
-                // 0.1 프로씩 증가 
+                DataManager.Instance.CurrentAddScore(3);
+            }
+
+            if (DataManager.Instance.CurrentScore % 5 == 0)
+            {
                 moveSpeed += 0.01f;
                 backGround.ChangeBackColor();
+
                 Handheld.Vibrate();
             }
-            if(DataManager.Instance.CurrentScore % 4 == 0 && ItemManager.Instance.isSpawn)
+            if (DataManager.Instance.CurrentScore % 4 == 0 && ItemManager.Instance.isSpawn)
             {
                 ItemManager.Instance.SpawnItem();
             }

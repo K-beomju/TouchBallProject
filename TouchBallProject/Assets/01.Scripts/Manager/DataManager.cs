@@ -23,9 +23,9 @@ public class DataManager : MonoSingleton<DataManager>
         set => _bestScore = value;
     }
 
-    public void CurrentAddScore()
+    public void CurrentAddScore(int value = 1)
     {
-        CurrentScore++;
+        CurrentScore += value;
     }
 
     public void UpdateBestScore()
