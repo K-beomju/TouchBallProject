@@ -70,7 +70,10 @@ public class Ball : MonoBehaviour
                 moveSpeed += 0.01f;
                 backGround.ChangeBackColor();
                 Handheld.Vibrate();
-
+            }
+            if(DataManager.Instance.CurrentScore % 4 == 0 && ItemManager.Instance.isSpawn)
+            {
+                ItemManager.Instance.SpawnItem();
             }
         }
     }

@@ -11,13 +11,14 @@ public class Press : MonoBehaviour
     private float pressIntensity;
     #endregion
 
-    private Camera cam;
+    private Camera mainCam;
 
     private void Awake()
     {
-        cam = Camera.main;
-        Vector3 bottomCenter = cam.ViewportToWorldPoint(new Vector3(1, 0.5f, cam.nearClipPlane));
-        transform.position = bottomCenter;
+        mainCam = Camera.main;
+        Vector3 rightCenter = mainCam.ViewportToWorldPoint(new Vector3(1, 0.5f, mainCam.nearClipPlane));
+        transform.position = rightCenter;
+
     }
 
     public void ChangePressTransform()
@@ -31,7 +32,7 @@ public class Press : MonoBehaviour
         }
         pressAmbientSq.Play().OnComplete(() =>
         {
-            float targetX = -transform.position.x;
+            float targetX = -transform.localPosition.x;
             transform.position = new Vector3(targetX + (transform.position.x > 0 ? -0.3f : 0.3f), Random.Range(-3.5f, 3.6f), 0);
             transform.DOMoveX(targetX, 0.1f);
         });
