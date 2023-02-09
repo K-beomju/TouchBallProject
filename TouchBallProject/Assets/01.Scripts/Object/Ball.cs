@@ -68,11 +68,12 @@ public class Ball : MonoBehaviour
             else
             {
                 DataManager.Instance.CurrentAddScore(3);
+                UiManager.Instance.currentScore.ChangeGoldTextColor();
             }
 
             if (DataManager.Instance.CurrentScore % 5 == 0)
             {
-                moveSpeed += 0.01f;
+                moveSpeed += 0.02f;
                 backGround.ChangeBackColor();
 
                 Handheld.Vibrate();

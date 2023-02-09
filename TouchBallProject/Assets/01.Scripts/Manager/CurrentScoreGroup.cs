@@ -24,6 +24,11 @@ public class CurrentScoreGroup : MonoBehaviour
         currentScoreText.text = currentScore.ToString();
     }
 
+    public void ChangeGoldTextColor()
+    {
+        currentScoreText.DOColor(Color.yellow , 0.5f).OnComplete(() => currentScoreText.DOColor(Color.black, 0.5f));
+    }
+
 
     public void GameOverDirect()
     {
