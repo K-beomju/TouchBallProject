@@ -11,6 +11,16 @@ public class Press : MonoBehaviour
     private float pressIntensity;
     #endregion
 
+    private Camera cam;
+
+    private void Awake()
+    {
+        cam = Camera.main;
+        //Vector3 topLeft = cam.ViewportToWorldPoint(new Vector3(0, 1, cam.nearClipPlane));
+        Vector3 bottomCenter = cam.ViewportToWorldPoint(new Vector3(1, 0.5f, cam.nearClipPlane));
+        transform.position = bottomCenter;
+    }
+
     public void ChangePressTransform()
     {
         pressAmbientSq = DOTween.Sequence();
