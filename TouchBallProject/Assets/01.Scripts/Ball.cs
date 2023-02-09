@@ -5,7 +5,8 @@ using UnityEngine.EventSystems;
 
 public class Ball : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [SerializeField] private float dirSpeed;
+    [SerializeField] private float moveSpeed;
     [SerializeField] private GameObject dieEffect;
 
     [SerializeField] private CameraResolution cameraRs;
@@ -40,7 +41,7 @@ public class Ball : MonoBehaviour
     private void FixedUpdate()
     {
         if(!isStart)
-        transform.Translate(Vector2.right * (speed * Time.deltaTime));
+        transform.Translate(Vector2.right * (dirSpeed * Time.deltaTime * moveSpeed));
         
         if(cameraRs.OutScreenBall(transform.position))
         {
@@ -56,9 +57,18 @@ public class Ball : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Press"))
         {
-            speed *= -1;
+            dirSpeed *= -1f;
             press.ChangePressTransform();
             DataManager.Instance.CurrentAddScore();
+
+
+            // 5의 배수가 될 때 점점 어려워지게 || 이벤트 아이템 
+            if(DataManager.Instance.CurrentScore % 5 == 0)
+            {
+                // 0.1 프로씩 증가 
+                moveSpeed += 0.01f;
+
+            }
         }
     }
 

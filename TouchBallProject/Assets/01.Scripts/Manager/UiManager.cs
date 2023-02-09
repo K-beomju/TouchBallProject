@@ -25,7 +25,7 @@ public class UiManager : MonoSingleton<UiManager>
     public void GameOverUI()
     {
         retryButton.SetActive(true);
-        currentScore.GameOverDirect();
+        //currentScore.GameOverDirect();
     }
 
 }
