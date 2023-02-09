@@ -23,8 +23,6 @@ public class DataManager : MonoSingleton<DataManager>
         set => _bestScore = value;
     }
 
-
-
     public void CurrentAddScore()
     {
         CurrentScore++;

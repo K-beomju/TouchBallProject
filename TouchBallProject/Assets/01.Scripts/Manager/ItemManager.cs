@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using static UnityEditor.Progress;
+using UnityEngine.UI;
 
 public class ItemManager : MonoSingleton<ItemManager>
 {
@@ -13,6 +13,11 @@ public class ItemManager : MonoSingleton<ItemManager>
     private SpriteRenderer itemSr;
     private Camera mainCam;
     private WaitForSeconds delay = new WaitForSeconds(10);
+    private float startTime;
+    private float cooldown = 10;
+
+    [SerializeField] private GameObject itemGroup;
+    [SerializeField] private Text countText;
 
     public bool isSpawn = true;
 
@@ -42,7 +47,7 @@ public class ItemManager : MonoSingleton<ItemManager>
         IEnumerator UseItemCo()
         {
             // TODO
-
+            itemGroup.SetActive(true);
             yield return StartCoroutine(BigPress());
             yield return delay;
 
@@ -54,9 +59,15 @@ public class ItemManager : MonoSingleton<ItemManager>
     private IEnumerator BigPress()
     {
         press.transform.DOScaleY(3, 0.5f);
-        yield return delay;
+        startTime = Time.time;
+        while (Time.time - startTime < cooldown)
+        {
+            float remainingTime = cooldown - (Time.time - startTime);
+            countText.text = remainingTime.ToString("F0") + "S";
+            yield return null;
+        }
+        itemGroup.SetActive(false);
         press.transform.DOScaleY(1.5f, 0.5f);
-
     }
 
 
