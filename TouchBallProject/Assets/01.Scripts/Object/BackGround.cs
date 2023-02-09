@@ -24,6 +24,11 @@ public class BackGround : MonoBehaviour
             currentColor = 0;
     }
 
+    public void GameOver()
+    {
+        sr.DOColor(Color.white, 1);
+    }
+
     private List<T> ShuffleList<T>(List<T> list)
     {
         for (int i = list.Count - 1; i > 0; i--)

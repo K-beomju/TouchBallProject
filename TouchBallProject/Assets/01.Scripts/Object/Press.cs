@@ -6,7 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Press : MonoBehaviour
 {
-    #region ¿¥ºñ¾ðÆ® ¿¬Ãâ 
+    #region ì•°ë¹„ì–¸íŠ¸ ì—°ì¶œ 
     private Sequence pressAmbientSq;
     private float pressIntensity;
     #endregion
@@ -16,7 +16,6 @@ public class Press : MonoBehaviour
     private void Awake()
     {
         cam = Camera.main;
-        //Vector3 topLeft = cam.ViewportToWorldPoint(new Vector3(0, 1, cam.nearClipPlane));
         Vector3 bottomCenter = cam.ViewportToWorldPoint(new Vector3(1, 0.5f, cam.nearClipPlane));
         transform.position = bottomCenter;
     }
@@ -33,14 +32,14 @@ public class Press : MonoBehaviour
         pressAmbientSq.Play().OnComplete(() =>
         {
             float targetX = -transform.position.x;
-            transform.position = new Vector3(targetX + (transform.position.x > 0 ? -0.5f : 0.5f), Random.Range(-4, 5), 0);
+            transform.position = new Vector3(targetX + (transform.position.x > 0 ? -0.3f : 0.3f), Random.Range(-3.5f, 3.6f), 0);
             transform.DOMoveX(targetX, 0.1f);
         });
     }
 
     public void GameOverDirect()
     {
-        transform.DOMoveX(transform.position.x + (transform.position.x > 0 ? 0.5f : -0.5f), 1f);
+        transform.DOMoveX(transform.position.x + (transform.position.x > 0 ? 0.3f : -0.3f), 1f);
     }
 
 }

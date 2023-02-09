@@ -8,8 +8,8 @@ public class UiManager : MonoSingleton<UiManager>
 {
     public CurrentScoreGroup currentScore;
     public BestScoreGroup bestScore;
-
-    public GameObject retryButton;
+    public HomeButton home;
+    public BackGround back;
 
     protected override void Start()
     {
@@ -24,7 +24,9 @@ public class UiManager : MonoSingleton<UiManager>
 
     public void GameOverUI()
     {
-        retryButton.SetActive(true);
+        home.gameObject.SetActive(true);
+        home.ShowHomeButton();
+        back.GameOver();
         //currentScore.GameOverDirect();
     }
 
