@@ -44,6 +44,8 @@ public class ItemManager : MonoSingleton<ItemManager>
             // TODO
 
             yield return StartCoroutine(BigPress());
+            yield return delay;
+
             isSpawn = true;
         }
 
@@ -54,6 +56,7 @@ public class ItemManager : MonoSingleton<ItemManager>
         press.transform.DOScaleY(3, 0.5f);
         yield return delay;
         press.transform.DOScaleY(1.5f, 0.5f);
+
     }
 
 
