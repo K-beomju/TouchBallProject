@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour
 
     [SerializeField] private CameraResolution cameraRs;
     [SerializeField] private Press press;
+    [SerializeField] private BackGround backGround;
 
     private Rigidbody2D rb;
     private bool isStart = true;
@@ -67,7 +68,7 @@ public class Ball : MonoBehaviour
             {
                 // 0.1 프로씩 증가 
                 moveSpeed += 0.01f;
-
+                backGround.ChangeBackColor();
             }
         }
     }
