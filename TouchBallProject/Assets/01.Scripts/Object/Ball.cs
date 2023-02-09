@@ -69,6 +69,8 @@ public class Ball : MonoBehaviour
                 // 0.1 프로씩 증가 
                 moveSpeed += 0.01f;
                 backGround.ChangeBackColor();
+                Handheld.Vibrate();
+
             }
         }
     }
