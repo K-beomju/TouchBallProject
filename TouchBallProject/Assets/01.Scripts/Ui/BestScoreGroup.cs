@@ -11,24 +11,21 @@ public class BestScoreGroup : MonoBehaviour
     private RectTransform rtm;
     private CanvasGroup canvasGroup;
 
-    private void Awake() 
+    private void Awake()
     {
         rtm = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
-    private void Start() 
+    private void Start()
     {
-        canvasGroup.DOFade(1,0.5f);
+        canvasGroup.DOFade(1, 0.5f);
         rtm.DOAnchorPosY(0, 0.5f);
     }
 
-    public void ShowBestScore()
+    public void ShowBestScore(int bestScore)
     {
-        if (SecurityPlayerPrefs.HasKey("bestScore"))
-        {
-            bestScoreText.text = SecurityPlayerPrefs.GetInt("bestScore", default).ToString();
-        }
+        bestScoreText.text = bestScore.ToString();
     }
 
 }

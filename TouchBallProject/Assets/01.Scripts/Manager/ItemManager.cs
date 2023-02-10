@@ -8,13 +8,14 @@ public class ItemManager : MonoSingleton<ItemManager>
 {
     [SerializeField] private GameObject itemObj;
     [SerializeField] private GameObject pressObj;
-    public GameObject ballObj;
+    [SerializeField] private GameObject ballObj;
     [SerializeField] private GameObject itemGroup;
     [SerializeField] private Text countText;
 
     private SpriteRenderer itemSr;
     private Press press;
     private Ball ball;
+    [SerializeField] private Star star;
     private Camera mainCam;
 
     private WaitForSeconds delay = new WaitForSeconds(10);
@@ -25,6 +26,7 @@ public class ItemManager : MonoSingleton<ItemManager>
 
     private List<System.Func<IEnumerator>> _itemPatterns = new List<System.Func<IEnumerator>>();
 
+    public List<Star> starList = new List<Star>();
     public bool isSpawn = true;
 
 
@@ -65,7 +67,7 @@ public class ItemManager : MonoSingleton<ItemManager>
         {
             itemGroup.SetActive(true);
             countText.text = "";
-            yield return StartCoroutine(_itemPatterns[itemValue++]());
+            yield return StartCoroutine(SpawnStar()); //StartCoroutine(_itemPatterns[itemValue++]());
             itemGroup.SetActive(false);
             if (itemValue >= _itemPatterns.Count)
             {
@@ -122,11 +124,26 @@ public class ItemManager : MonoSingleton<ItemManager>
         ball.isSlow = false;
     }
 
-
-
-    public Vector2 RandCameraViewPosition()
+    private IEnumerator SpawnStar()
     {
-        return mainCam.ViewportToWorldPoint(new Vector3(Random.Range(0.4f, 0.7f), Random.Range(0.4f, 0.7f), 0));
+        for (int i = 0; i < 5; i++)
+        {
+            GameObject starObj = Instantiate(star.gameObject,RandCameraViewPosition(0.1f , 0.9f), Quaternion.identity);
+        }
+        startTime = Time.time;
+        while (Time.time - startTime < cooldown)
+        {
+            float remainingTime = cooldown - (Time.time - startTime);
+            countText.text = remainingTime.ToString("F0") + "S";
+            yield return null;
+        }
+    }
+
+
+
+    public Vector2 RandCameraViewPosition(float x = 0.4f, float y = 0.7f)
+    {
+        return mainCam.ViewportToWorldPoint(new Vector3(Random.Range(x, y), Random.Range(x, y), 0));
     }
 
 

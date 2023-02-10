@@ -7,6 +7,7 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] private float dirSpeed;
     public float moveSpeed;
+    public float rotateSpeed;
     public bool isSlow = false;
     [SerializeField] private GameObject dieEffect;
 
@@ -43,7 +44,10 @@ public class Ball : MonoBehaviour
     private void FixedUpdate()
     {
         if (!isStart)
-            transform.Translate(Vector2.right * (dirSpeed * Time.deltaTime * moveSpeed));
+        {
+            transform.Translate(Vector3.right * (dirSpeed * Time.deltaTime * moveSpeed), Space.World);
+            transform.Rotate(new Vector3(0,0, 30 * rotateSpeed * Time.deltaTime));
+        }
 
         if (cameraRs.OutScreenBall(transform.position))
         {
@@ -55,13 +59,26 @@ public class Ball : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        if(other.CompareTag("Star"))
+        {
+            other.GetComponent<Star>().GoStarPanel();
+        }    
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Press"))
         {
+
+            rotateSpeed *= -1f;
             dirSpeed *= -1f;
             if (!isSlow)
+            {
                 moveSpeed += 0.01f;
+                rotateSpeed += 1;
+            }
             if (!press.isChange)
                 press.ChangePressTransform();
 

@@ -7,14 +7,14 @@ using DG.Tweening;
 public class CurrentScoreGroup : MonoBehaviour
 {
     [SerializeField] private Text currentScoreText;
-
     [SerializeField] private Text goldScoreText;
 
     private RectTransform getGoldTextRtm;
     private CanvasGroup canvasGroup;
     private RectTransform rtm;
-
     private Sequence gameOverSq;
+
+    [SerializeField] private Transform ballObj;
 
     private void Awake()
     {
@@ -33,7 +33,7 @@ public class CurrentScoreGroup : MonoBehaviour
     {
         getGoldTextRtm.gameObject.SetActive(true);
         goldScoreText.DOFade(1,0);
-        getGoldTextRtm.transform.position = ItemManager.Instance.ballObj.transform.position;
+        getGoldTextRtm.transform.position = ballObj.position;
         getGoldTextRtm.DOAnchorPosY(getGoldTextRtm.anchoredPosition.y + 100, 0.5f);
         goldScoreText.DOFade(0, 1f);
         
