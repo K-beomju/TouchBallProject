@@ -8,19 +8,19 @@ public class BestScoreGroup : MonoBehaviour
 {
     [SerializeField] private Text bestScoreText;
 
-    private RectTransform rect;
+    private RectTransform rtm;
     private CanvasGroup canvasGroup;
 
     private void Awake() 
     {
-        rect = GetComponent<RectTransform>();
+        rtm = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
     private void Start() 
     {
         canvasGroup.DOFade(1,0.5f);
-        rect.DOAnchorPosY(0, 0.5f);
+        rtm.DOAnchorPosY(0, 0.5f);
     }
 
     public void ShowBestScore()

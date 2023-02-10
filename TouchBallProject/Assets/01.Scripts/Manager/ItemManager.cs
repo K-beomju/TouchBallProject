@@ -65,9 +65,9 @@ public class ItemManager : MonoSingleton<ItemManager>
         {
             itemGroup.SetActive(true);
             countText.text = "";
-            yield return  StartCoroutine(_itemPatterns[itemValue++]());
+            yield return StartCoroutine(_itemPatterns[itemValue++]());
             itemGroup.SetActive(false);
-            if(itemValue >= _itemPatterns.Count)
+            if (itemValue >= _itemPatterns.Count)
             {
                 Define.ShuffleList(_itemPatterns);
                 itemValue = 0;
@@ -107,7 +107,7 @@ public class ItemManager : MonoSingleton<ItemManager>
     }
 
     private IEnumerator SlowBall()
-    {   
+    {
         float currentSpeed = ball.moveSpeed;
         ball.moveSpeed = 1;
         ball.isSlow = true;

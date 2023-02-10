@@ -60,10 +60,10 @@ public class Ball : MonoBehaviour
         if (other.gameObject.CompareTag("Press"))
         {
             dirSpeed *= -1f;
-            if(!isSlow)
-            moveSpeed += 0.01f;
-            if(!press.isChange)
-            press.ChangePressTransform();
+            if (!isSlow)
+                moveSpeed += 0.01f;
+            if (!press.isChange)
+                press.ChangePressTransform();
 
             if (!press.isGoldPress)
                 DataManager.Instance.CurrentAddScore();
@@ -84,5 +84,6 @@ public class Ball : MonoBehaviour
             }
         }
     }
+
 
 }
