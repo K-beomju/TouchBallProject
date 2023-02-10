@@ -8,7 +8,7 @@ public class ItemManager : MonoSingleton<ItemManager>
 {
     [SerializeField] private GameObject itemObj;
     [SerializeField] private GameObject pressObj;
-    [SerializeField] private GameObject ballObj;
+        public GameObject ballObj;
     [SerializeField] private GameObject itemGroup;
     [SerializeField] private Text countText;
 
@@ -65,7 +65,7 @@ public class ItemManager : MonoSingleton<ItemManager>
         {
             itemGroup.SetActive(true);
             countText.text = "";
-            yield return StartCoroutine(_itemPatterns[itemValue++]());
+            yield return StartCoroutine(GoldPress());   //(_itemPatterns[itemValue++]());
             itemGroup.SetActive(false);
             if (itemValue >= _itemPatterns.Count)
             {

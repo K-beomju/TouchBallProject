@@ -8,6 +8,9 @@ public class CurrentScoreGroup : MonoBehaviour
 {
     [SerializeField] private Text currentScoreText;
 
+    [SerializeField] private Text goldScoreText;
+
+    private RectTransform getGoldTextRtm;
     private CanvasGroup canvasGroup;
     private RectTransform rtm;
 
@@ -17,6 +20,7 @@ public class CurrentScoreGroup : MonoBehaviour
     {
         canvasGroup = GetComponent<CanvasGroup>();
         rtm = GetComponent<RectTransform>();
+        getGoldTextRtm = goldScoreText.GetComponent<RectTransform>();
     }
 
     public void ShowCurrentScore(int currentScore)
@@ -24,8 +28,15 @@ public class CurrentScoreGroup : MonoBehaviour
         currentScoreText.text = currentScore.ToString();
     }
 
+    [ContextMenu("ChangeGoldTextColor")]
     public void ChangeGoldTextColor()
     {
+        getGoldTextRtm.gameObject.SetActive(true);
+        goldScoreText.DOFade(1,0);
+        getGoldTextRtm.transform.position = ItemManager.Instance.ballObj.transform.position;
+        getGoldTextRtm.DOAnchorPosY(getGoldTextRtm.anchoredPosition.y + 100, 0.5f);
+        goldScoreText.DOFade(0, 1f);
+        
         currentScoreText.DOColor(Color.yellow , 0.3f).OnComplete(() => currentScoreText.DOColor(Color.black, 0.3f));
     }
 
