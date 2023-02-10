@@ -994,6 +994,7 @@ MonoBehaviour:
   cameraRs: {fileID: 519420033}
   press: {fileID: 764702715}
   backGroundMove: {fileID: 735895099}
+  ease: 4
 --- !u!96 &591122895
 TrailRenderer:
   serializedVersion: 2
