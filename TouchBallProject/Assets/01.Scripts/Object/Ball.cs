@@ -13,7 +13,6 @@ public class Ball : MonoBehaviour
 
     [SerializeField] private CameraResolution cameraRs;
     [SerializeField] private Press press;
-    [SerializeField] private BackGround backGround;
 
     private Rigidbody2D rb;
     private bool isStart = true;
@@ -92,7 +91,6 @@ public class Ball : MonoBehaviour
 
             if (DataManager.Instance.CurrentScore % 5 == 0)
             {
-                backGround.ChangeBackColor();
                 Handheld.Vibrate();
             }
             if (DataManager.Instance.CurrentScore % 4 == 0 && ItemManager.Instance.isSpawn)
