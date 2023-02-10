@@ -37,7 +37,7 @@ public class CurrentScoreGroup : MonoBehaviour
         getGoldTextRtm.DOAnchorPosY(getGoldTextRtm.anchoredPosition.y + 100, 0.5f);
         goldScoreText.DOFade(0, 1f);
         
-        currentScoreText.DOColor(Color.yellow , 0.3f).OnComplete(() => currentScoreText.DOColor(Color.black, 0.3f));
+        currentScoreText.DOColor(Color.yellow , 0.3f).OnComplete(() => currentScoreText.DOColor(Color.white, 0.3f));
     }
 
 

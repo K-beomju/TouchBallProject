@@ -67,7 +67,7 @@ public class Press : MonoBehaviour
     public void ChangeNormalPress()
     {
         isGoldPress = false;
-        sr.DOColor(Color.black, 0.5f);
+        sr.DOColor(Color.white, 0.5f);
         ambient1Sr.color = normalAmbient1;
         ambient2Sr.color = normalAmbient2;
         goldParticle.SetActive(false);

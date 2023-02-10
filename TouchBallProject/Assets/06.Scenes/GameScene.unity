@@ -993,6 +993,7 @@ MonoBehaviour:
   dieEffect: {fileID: 3158167954560258763, guid: 77038115acb22294388e156326291156, type: 3}
   cameraRs: {fileID: 519420033}
   press: {fileID: 764702715}
+  backGroundMove: {fileID: 735895099}
 --- !u!96 &591122895
 TrailRenderer:
   serializedVersion: 2
@@ -1168,7 +1169,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1500, y: 2000}
+  m_SizeDelta: {x: 2000, y: 2000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &735895097
 MonoBehaviour:

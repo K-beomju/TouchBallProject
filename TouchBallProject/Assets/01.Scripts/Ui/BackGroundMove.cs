@@ -25,4 +25,9 @@ public class BackGroundMove : MonoBehaviour
             rawImage.uvRect = uvRect;
         }
     }
+
+    public void UpBackSpeed()
+    {
+        speed += 0.01f;
+    }
 }

@@ -67,7 +67,7 @@ public class ItemManager : MonoSingleton<ItemManager>
         {
             itemGroup.SetActive(true);
             countText.text = "";
-            yield return StartCoroutine(SpawnStar()); //StartCoroutine(_itemPatterns[itemValue++]());
+            yield return StartCoroutine(_itemPatterns[itemValue++]());
             itemGroup.SetActive(false);
             if (itemValue >= _itemPatterns.Count)
             {
