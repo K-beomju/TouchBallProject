@@ -40,6 +40,7 @@ public class ItemManager : MonoSingleton<ItemManager>
         _itemPatterns.Add(BigPress);
         _itemPatterns.Add(GoldPress);
         _itemPatterns.Add(SlowBall);
+        _itemPatterns.Add(SpawnStar);
 
         Define.ShuffleList(_itemPatterns);
 
@@ -106,6 +107,7 @@ public class ItemManager : MonoSingleton<ItemManager>
             yield return null;
         }
         press.ChangeNormalPress();
+
     }
 
     private IEnumerator SlowBall()

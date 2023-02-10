@@ -989,6 +989,7 @@ MonoBehaviour:
   dirSpeed: 2.5
   moveSpeed: 1
   rotateSpeed: -3
+  jumpSpeed: 6
   isSlow: 0
   dieEffect: {fileID: 3158167954560258763, guid: 77038115acb22294388e156326291156, type: 3}
   cameraRs: {fileID: 519420033}
@@ -1066,8 +1067,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0, b: 0, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.9716981, g: 0.23375754, b: 0.23375754, a: 1}
+      key1: {r: 0.98039216, g: 0.5525702, b: 0.21568625, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1689,6 +1690,7 @@ MonoBehaviour:
   itemGroup: {fileID: 1169118603}
   countText: {fileID: 99676171}
   star: {fileID: 3795955799837321136, guid: 9f214b97faba067429588d55004c7af0, type: 3}
+  backGround: {fileID: 735895099}
   starList: []
   isSpawn: 1
 --- !u!1 &919755564

@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private float dirSpeed;
     public float moveSpeed;
     public float rotateSpeed;
+    public float jumpSpeed;
     public bool isSlow = false;
     [SerializeField] private GameObject dieEffect;
 
@@ -44,7 +45,7 @@ public class Ball : MonoBehaviour
                     rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                     UiManager.Instance.GameStartUI();
                 }
-                rb.velocity = new Vector2(0, 5);
+                rb.velocity = new Vector2(0, jumpSpeed);
             }
         }
 
@@ -83,6 +84,7 @@ public class Ball : MonoBehaviour
         if (other.gameObject.CompareTag("Press"))
         {
 
+            DataManager.Instance.AddStar();
             rotateSpeed *= -1f;
             dirSpeed *= -1f;
             if (!isSlow)
