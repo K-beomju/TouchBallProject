@@ -19,10 +19,11 @@ public class Press : MonoBehaviour
     #endregion
 
 
-    private SpriteRenderer sr;
     public bool isGoldPress = false;
+    public bool isChange = false;
     public GameObject goldParticle;
 
+    private SpriteRenderer sr;
     private Camera mainCam;
 
     private void Awake()
@@ -37,6 +38,7 @@ public class Press : MonoBehaviour
 
     public void ChangePressTransform()
     {
+        isChange = true;
         pressAmbientSq = DOTween.Sequence();
         pressIntensity = 0;
         for (int i = 0; i < transform.childCount; i++)
@@ -48,7 +50,7 @@ public class Press : MonoBehaviour
         {
             float targetX = -transform.localPosition.x;
             transform.position = new Vector3(targetX + (transform.position.x > 0 ? -0.3f : 0.3f), Random.Range(-3.5f, 3.6f), 0);
-            transform.DOMoveX(targetX, 0.1f);
+            transform.DOMoveX(targetX, 0.1f).OnComplete(() => isChange = false);
         });
     }
 

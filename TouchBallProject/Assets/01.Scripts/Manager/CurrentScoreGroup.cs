@@ -26,7 +26,7 @@ public class CurrentScoreGroup : MonoBehaviour
 
     public void ChangeGoldTextColor()
     {
-        currentScoreText.DOColor(Color.yellow , 0.5f).OnComplete(() => currentScoreText.DOColor(Color.black, 0.5f));
+        currentScoreText.DOColor(Color.yellow , 0.3f).OnComplete(() => currentScoreText.DOColor(Color.black, 0.3f));
     }
 
 

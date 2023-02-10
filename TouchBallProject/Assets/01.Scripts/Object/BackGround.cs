@@ -13,7 +13,7 @@ public class BackGround : MonoBehaviour
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
-        ShuffleList(colorList);
+        Define.ShuffleList(colorList);
     }
 
     public void ChangeBackColor()
@@ -29,18 +29,5 @@ public class BackGround : MonoBehaviour
         sr.DOColor(Color.white, 1);
     }
 
-    private List<T> ShuffleList<T>(List<T> list)
-    {
-        for (int i = list.Count - 1; i > 0; i--)
-        {
-            int rnd = UnityEngine.Random.Range(0, i);
-
-            T temp = list[i];
-            list[i] = list[rnd];
-            list[rnd] = temp;
-        }
-
-        return list;
-    }
 
 }

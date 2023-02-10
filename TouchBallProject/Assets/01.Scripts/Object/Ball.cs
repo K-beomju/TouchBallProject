@@ -62,6 +62,7 @@ public class Ball : MonoBehaviour
             dirSpeed *= -1f;
             if(!isSlow)
             moveSpeed += 0.01f;
+            if(!press.isChange)
             press.ChangePressTransform();
 
             if (!press.isGoldPress)

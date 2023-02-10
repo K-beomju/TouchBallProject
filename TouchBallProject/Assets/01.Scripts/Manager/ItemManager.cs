@@ -7,27 +7,26 @@ using UnityEngine.UI;
 public class ItemManager : MonoSingleton<ItemManager>
 {
     [SerializeField] private GameObject itemObj;
-    private SpriteRenderer itemSr;
-
     [SerializeField] private GameObject pressObj;
-    private Press press;
     [SerializeField] private GameObject ballObj;
-    private Ball ball;
-
     [SerializeField] private GameObject itemGroup;
     [SerializeField] private Text countText;
-    
+
+    private SpriteRenderer itemSr;
+    private Press press;
+    private Ball ball;
     private Camera mainCam;
 
     private WaitForSeconds delay = new WaitForSeconds(10);
     private float startTime;
     private float cooldown = 10;
 
+    private int itemValue = 0;
+
     private List<System.Func<IEnumerator>> _itemPatterns = new List<System.Func<IEnumerator>>();
 
-
-
     public bool isSpawn = true;
+
 
     private void Awake()
     {
@@ -40,7 +39,10 @@ public class ItemManager : MonoSingleton<ItemManager>
         _itemPatterns.Add(GoldPress);
         _itemPatterns.Add(SlowBall);
 
+        Define.ShuffleList(_itemPatterns);
+
     }
+
 
     public void SpawnItem()
     {
@@ -63,8 +65,13 @@ public class ItemManager : MonoSingleton<ItemManager>
         {
             itemGroup.SetActive(true);
             countText.text = "";
-            yield return  StartCoroutine(_itemPatterns[Random.Range(0, _itemPatterns.Count)]());
+            yield return  StartCoroutine(_itemPatterns[itemValue++]());
             itemGroup.SetActive(false);
+            if(itemValue >= _itemPatterns.Count)
+            {
+                Define.ShuffleList(_itemPatterns);
+                itemValue = 0;
+            }
 
             yield return delay;
 
@@ -113,8 +120,8 @@ public class ItemManager : MonoSingleton<ItemManager>
         }
         ball.moveSpeed = currentSpeed;
         ball.isSlow = false;
-
     }
+
 
 
     public Vector2 RandCameraViewPosition()
