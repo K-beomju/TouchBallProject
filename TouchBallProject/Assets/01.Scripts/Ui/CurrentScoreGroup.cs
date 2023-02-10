@@ -7,6 +7,7 @@ using DG.Tweening;
 public class CurrentScoreGroup : MonoBehaviour
 {
     [SerializeField] private Text currentScoreText;
+    [SerializeField] private Text currentDescText;
     [SerializeField] private Text goldScoreText;
 
     private RectTransform getGoldTextRtm;
@@ -32,12 +33,12 @@ public class CurrentScoreGroup : MonoBehaviour
     public void ChangeGoldTextColor()
     {
         getGoldTextRtm.gameObject.SetActive(true);
-        goldScoreText.DOFade(1,0);
+        goldScoreText.DOFade(1, 0);
         getGoldTextRtm.transform.position = ballObj.position;
         getGoldTextRtm.DOAnchorPosY(getGoldTextRtm.anchoredPosition.y + 100, 0.5f);
         goldScoreText.DOFade(0, 1f);
-        
-        currentScoreText.DOColor(Color.yellow , 0.3f).OnComplete(() => currentScoreText.DOColor(Color.white, 0.3f));
+
+        currentScoreText.DOColor(Color.yellow, 0.3f).OnComplete(() => currentScoreText.DOColor(Color.white, 0.3f));
     }
 
 
@@ -45,6 +46,13 @@ public class CurrentScoreGroup : MonoBehaviour
     {
         gameOverSq = DOTween.Sequence();
         gameOverSq.AppendInterval(1);
-        gameOverSq.Append(rtm.DOScale(new Vector3(1.2f,1.2f,0), 1));
+        gameOverSq.Append(rtm.DOScale(new Vector3(1.2f, 1.2f, 0), 1));
+        gameOverSq.Play();
+
+        if (DataManager.Instance.CurrentScore > DataManager.Instance.BestScore)
+        {
+            currentDescText.DOText("Best Score!", 1, true, ScrambleMode.All).SetDelay(2);
+        }
+
     }
 }

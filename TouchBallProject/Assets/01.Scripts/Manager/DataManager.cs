@@ -45,6 +45,7 @@ public class DataManager : MonoSingleton<DataManager>
         BestScore = SecurityPlayerPrefs.GetInt("bestScore", default);
         if(SecurityPlayerPrefs.HasKey("star"))
         Star = SecurityPlayerPrefs.GetInt("star", default);
+
     }
 
     public void CurrentAddScore(int value = 1)
