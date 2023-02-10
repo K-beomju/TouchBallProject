@@ -10,6 +10,8 @@ public class UiManager : MonoSingleton<UiManager>
     public BestScoreGroup bestScore;
     public HomeButton home;
     public BackGround back;
+    public GameObject itemGroup;
+    public GameObject item;
 
     protected override void Start()
     {
@@ -28,6 +30,8 @@ public class UiManager : MonoSingleton<UiManager>
         home.ShowHomeButton();
         back.GameOver();
         currentScore.GameOverDirect();
+        itemGroup.SetActive(false);
+        item.SetActive(false);
     }
 
 }
