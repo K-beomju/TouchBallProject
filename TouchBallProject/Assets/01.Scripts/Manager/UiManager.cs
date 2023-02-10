@@ -15,11 +15,14 @@ public class UiManager : MonoSingleton<UiManager>
     public GameObject itemGroup;
     public GameObject item;
 
+    [SerializeField] private CanvasGroup titleGroup;
+
     public void GameStartUI()
     {
         currentScore.gameObject.SetActive(true);
-        bestScore.gameObject.SetActive(false);
+        currentScore.FadeIn();
         backGroundMove.backStart = true;
+        titleGroup.DOFade(0,0.3f).OnComplete(() => titleGroup.gameObject.SetActive(false));
     }
 
     public void GameOverUI()

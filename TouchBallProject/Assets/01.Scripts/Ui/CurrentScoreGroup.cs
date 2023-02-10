@@ -29,6 +29,11 @@ public class CurrentScoreGroup : MonoBehaviour
         currentScoreText.text = currentScore.ToString();
     }
 
+    public void FadeIn()
+    {
+        canvasGroup.DOFade(1, 0.5f);
+    }
+
     [ContextMenu("ChangeGoldTextColor")]
     public void ChangeGoldTextColor()
     {
