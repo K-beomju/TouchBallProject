@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class Ball : MonoBehaviour
 {
@@ -17,10 +18,16 @@ public class Ball : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isStart = true;
+    [SerializeField] private Ease ease;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start() 
+    {
+        transform.DOMoveY(0.5f, 2).SetEase(ease).SetLoops(-1, LoopType.Yoyo);
     }
 
     private void Update()
@@ -31,6 +38,7 @@ public class Ball : MonoBehaviour
             {
                 if (isStart)
                 {
+                    DOTween.KillAll();
                     isStart = false;
                     press.gameObject.SetActive(true);
                     rb.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -39,6 +47,9 @@ public class Ball : MonoBehaviour
                 rb.velocity = new Vector2(0, 5);
             }
         }
+
+        if(isStart)
+        transform.Rotate(new Vector3(0,0,-30 * Time.deltaTime));
     }
 
     private void FixedUpdate()
