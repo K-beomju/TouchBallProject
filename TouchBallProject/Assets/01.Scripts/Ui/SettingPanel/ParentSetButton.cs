@@ -32,13 +32,11 @@ public abstract class ParentSetButton : MonoBehaviour
 
     protected virtual void SetOn()
     {
-        image.sprite = setSprites[1];
-
+        image.sprite = setSprites[0];
     }
 
     protected virtual void SetOff()
     {
-        image.sprite = setSprites[0];
-
+        image.sprite = setSprites[1];
     }
 }
