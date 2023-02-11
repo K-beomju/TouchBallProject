@@ -1068,6 +1068,7 @@ GameObject:
   - component: {fileID: 348290677}
   - component: {fileID: 348290676}
   - component: {fileID: 348290675}
+  - component: {fileID: 348290678}
   m_Layer: 0
   m_Name: VibrateButton
   m_TagString: Untagged
@@ -1176,6 +1177,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 348290673}
   m_CullTransparentMesh: 1
+--- !u!114 &348290678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348290673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f7623b1cf1544fcfa41bbba2e92c0bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setSprites:
+  - {fileID: 21300000, guid: 9eda7e0732e094594847e63897b846d5, type: 3}
+  - {fileID: 21300000, guid: f0bf982a5b55346c5ad1cf27bc5df076, type: 3}
 --- !u!1 &363204631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,6 +1919,8 @@ GameObject:
   - component: {fileID: 730791496}
   - component: {fileID: 730791498}
   - component: {fileID: 730791497}
+  - component: {fileID: 730791499}
+  - component: {fileID: 730791500}
   m_Layer: 0
   m_Name: SettingPanel
   m_TagString: Untagged
@@ -1968,6 +1986,74 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730791495}
   m_CullTransparentMesh: 1
+--- !u!114 &730791499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730791495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 730791497}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 730791495}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &730791500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730791495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4752a46af426e43b2a31b183e9001e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &735895095
 GameObject:
   m_ObjectHideFlags: 0
@@ -8754,6 +8840,7 @@ GameObject:
   - component: {fileID: 1885389182}
   - component: {fileID: 1885389181}
   - component: {fileID: 1885389180}
+  - component: {fileID: 1885389183}
   m_Layer: 0
   m_Name: SoundButton
   m_TagString: Untagged
@@ -8862,6 +8949,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1885389178}
   m_CullTransparentMesh: 1
+--- !u!114 &1885389183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885389178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ca23a494767e48b5be346e782a9f000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1922723978
 GameObject:
   m_ObjectHideFlags: 0
