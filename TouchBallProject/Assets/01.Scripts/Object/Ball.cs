@@ -105,7 +105,9 @@ public class Ball : MonoBehaviour
 
             if (DataManager.Instance.CurrentScore % 5 == 0)
             {
+                if(SecurityPlayerPrefs.GetBool("Vibrate", true))
                 Handheld.Vibrate();
+
                 backGroundMove.UpBackSpeed();
             }
             if (DataManager.Instance.CurrentScore % 4 == 0 && ItemManager.Instance.isSpawn)
