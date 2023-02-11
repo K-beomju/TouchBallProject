@@ -46,6 +46,7 @@ public class Ball : MonoBehaviour
                     UiManager.Instance.GameStartUI();
                 }
                 rb.velocity = new Vector2(0, jumpSpeed);
+                //SoundManager.Instance.PlayFXSound("1");
             }
         }
 
@@ -83,7 +84,7 @@ public class Ball : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Press"))
         {
-
+            //SoundManager.Instance.PlayFXSound("4");
             DataManager.Instance.AddStar();
             rotateSpeed *= -1f;
             dirSpeed *= -1f;
