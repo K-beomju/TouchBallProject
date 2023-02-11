@@ -39,10 +39,10 @@ public class ItemManager : MonoSingleton<ItemManager>
 
         _itemPatterns.Add(BigPress);
         _itemPatterns.Add(GoldPress);
-        _itemPatterns.Add(SlowBall);
         _itemPatterns.Add(SpawnStar);
-
         Define.ShuffleList(_itemPatterns);
+
+        _itemPatterns.Add(SlowBall);   // 처음 슬로우는 효과가 없어 뒤에 추가 
 
     }
 
