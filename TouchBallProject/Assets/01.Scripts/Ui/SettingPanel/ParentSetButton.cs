@@ -14,24 +14,31 @@ public abstract class ParentSetButton : MonoBehaviour
     {
         button = GetComponent<Button>();
         image = GetComponent<Image>();
-        button.onClick.AddListener(() =>  SetOnOff());
+        button.onClick.AddListener(() =>  SetOnOff(default));
     }
 
-    protected virtual void SetOnOff()
+    protected virtual void SetOnOff(bool _status)
     {
-        if(image.sprite == setSprites[0])
+        if(_status)
         {
-            image.sprite = setSprites[1];
             SetOff();
         }
         else
         {
-            image.sprite = setSprites[0];
             SetOn();
         }
 
     }
 
-    protected abstract void SetOn();
-    protected abstract void SetOff();
+    protected virtual void SetOn()
+    {
+        image.sprite = setSprites[1];
+
+    }
+
+    protected virtual void SetOff()
+    {
+        image.sprite = setSprites[0];
+
+    }
 }
