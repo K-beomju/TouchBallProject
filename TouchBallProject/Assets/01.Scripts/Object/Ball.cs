@@ -46,7 +46,7 @@ public class Ball : MonoBehaviour
                     UiManager.Instance.GameStartUI();
                 }
                 rb.velocity = new Vector2(0, jumpSpeed);
-                //SoundManager.Instance.PlayFXSound("1");
+                //  SoundManager.Instance.PlayFXSound("1");
             }
         }
 
