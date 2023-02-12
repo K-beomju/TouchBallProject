@@ -46,8 +46,6 @@ public class DataManager : MonoSingleton<DataManager>
         if(SecurityPlayerPrefs.HasKey("star"))
         Star = SecurityPlayerPrefs.GetInt("star", default);
 
-        Star = 1000;
-
     }
 
     public void CurrentAddScore(int value = 1)

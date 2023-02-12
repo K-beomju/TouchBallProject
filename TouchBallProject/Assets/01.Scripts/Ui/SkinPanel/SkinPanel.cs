@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class SkinPanel : MonoBehaviour
 {
@@ -81,7 +82,6 @@ public class SkinPanel : MonoBehaviour
         skinBtnList[temp].outline.enabled = true;
         ballSr.sprite = skinBtnList[temp].sprite;
         SecurityPlayerPrefs.SetInt(MOUNT_SKIN_KEY, temp);
-
     }
 
 
@@ -101,6 +101,19 @@ public class SkinPanel : MonoBehaviour
         }
         SecurityPlayerPrefs.SetInt(MOUNT_SKIN_KEY, 0);
 
+    }
+
+    public void ShowDirect()
+    {
+        for (int i = 0; i < parentGroup.transform.childCount; i++)
+        {
+            skinBtnList[i].RotateDirect();
+        }
+    }
+
+    public void StopDirect()
+    {
+        DOTween.KillAll();
     }
 
 }

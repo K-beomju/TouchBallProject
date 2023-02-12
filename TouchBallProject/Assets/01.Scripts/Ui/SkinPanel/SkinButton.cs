@@ -43,6 +43,12 @@ public class SkinButton : MonoBehaviour
         }
     }
 
+    public void RotateDirect()
+    {
+        cometRtm.DORotate(new Vector3(0,0,-360), 5f, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Incremental);
+
+    }
+
     public bool IsCheck()
     {
         return canvas != null && cometRtm != null;
