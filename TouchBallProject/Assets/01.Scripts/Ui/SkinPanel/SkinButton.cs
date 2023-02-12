@@ -29,7 +29,7 @@ public class SkinButton : MonoBehaviour
         {
             canvas.DOFade(0, 1);
             cometRtm.DOAnchorPosY(0, 1);
-            cometRtm.DOSizeDelta(new Vector2(150, 150), 1);
+            cometRtm.DOSizeDelta(new Vector2(180, 180), 1);
         }
     }
 
