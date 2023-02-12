@@ -130,7 +130,7 @@ public class ItemManager : MonoSingleton<ItemManager>
     {
         for (int i = 0; i < 5; i++)
         {
-            GameObject starObj = Instantiate(star.gameObject,RandCameraViewPosition(0.1f , 0.9f), Quaternion.identity);
+            GameObject starObj = Instantiate(star.gameObject,RandCameraViewPosition(0.2f , 0.8f), Quaternion.identity);
         }
         startTime = Time.time;
         while (Time.time - startTime < cooldown)
