@@ -18,11 +18,11 @@ public class SoundManager : MonoSingleton<SoundManager>
     private Dictionary<string, AudioClip> bgmSoundDic = new Dictionary<string, AudioClip>();
     private Dictionary<string, AudioClip> fxSoundDic = new Dictionary<string, AudioClip>();
 
-   
+
 
     private void Awake()
     {
-        foreach (var audioClip in Resources.LoadAll<AudioClip>("Sound/BGM")) 
+        foreach (var audioClip in Resources.LoadAll<AudioClip>("Sound/BGM"))
         {
             bgmSoundDic.Add(audioClip.name, audioClip);
         }
@@ -112,18 +112,23 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     public void PlayFXSound(string name)
     {
-        foreach (var fxAudioSource in fxAudioSourceList)
+        if (SecurityPlayerPrefs.GetBool("Sound", true))
         {
-            if (!fxAudioSource.isPlaying)
-            {
-                SetAudioSource(fxAudioSource, GetFxSound(name), false, FxVoulme, false);
-                fxAudioSource.Play();
-                return;
-            }
-        }
 
-        fxAudioSourceList.Add(MakeAudioSourceObject("FxObject"));
-        PlayFXSound(name);
+            foreach (var fxAudioSource in fxAudioSourceList)
+            {
+                if (!fxAudioSource.isPlaying)
+                {
+                    SetAudioSource(fxAudioSource, GetFxSound(name), false, FxVoulme, false);
+                    fxAudioSource.Play();
+                    return;
+                }
+            }
+
+            fxAudioSourceList.Add(MakeAudioSourceObject("FxObject"));
+            PlayFXSound(name);
+
+        }
     }
 
 }

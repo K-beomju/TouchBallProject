@@ -46,7 +46,7 @@ public class Ball : MonoBehaviour
                     UiManager.Instance.GameStartUI();
                 }
                 rb.velocity = new Vector2(0, jumpSpeed);
-                //  SoundManager.Instance.PlayFXSound("1");
+                SoundManager.Instance.PlayFXSound("Jump");
             }
         }
 
@@ -69,6 +69,8 @@ public class Ball : MonoBehaviour
             press.GameOverDirect();
             UiManager.Instance.GameOverUI();
             DataManager.Instance.UpdateBestScore();
+            SoundManager.Instance.PlayFXSound("Dead");
+
         }
     }
 
@@ -76,6 +78,7 @@ public class Ball : MonoBehaviour
     {
         if(other.CompareTag("Star"))
         {
+            SoundManager.Instance.PlayFXSound("Star");
             other.GetComponent<Star>().GoStarPanel();
         }    
     }
@@ -84,7 +87,7 @@ public class Ball : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Press"))
         {
-            //SoundManager.Instance.PlayFXSound("4");
+            SoundManager.Instance.PlayFXSound("Press");
             DataManager.Instance.AddStar();
             rotateSpeed *= -1f;
             dirSpeed *= -1f;

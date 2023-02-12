@@ -10,6 +10,7 @@ public class Item : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
+            SoundManager.Instance.PlayFXSound("Item");
             ItemManager.Instance.UseItem();
             gameObject.SetActive(false);
         }
