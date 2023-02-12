@@ -49,7 +49,7 @@ public class Press : MonoBehaviour
         pressAmbientSq.Play().OnComplete(() =>
         {
             float targetX = -transform.localPosition.x;
-            transform.position = new Vector3(targetX + (transform.position.x > 0 ? -0.1f : 0.1f), Random.Range(-3.5f, 3.6f), 0);
+            transform.position = new Vector3(targetX + (transform.position.x > 0 ? -0.1f : 0.1f), Random.Range(-3f, 3.1f), 0);
             transform.DOMoveX(targetX, 0.1f).OnComplete(() => isChange = false);
         });
     }
