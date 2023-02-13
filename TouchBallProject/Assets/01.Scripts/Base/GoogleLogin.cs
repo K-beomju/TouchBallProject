@@ -5,7 +5,7 @@ using GooglePlayGames;
 
 public class GoogleLogin : MonoBehaviour
 {
-    private void Start() 
+    private void Awake() 
     {
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
@@ -17,7 +17,7 @@ public class GoogleLogin : MonoBehaviour
         if(PlayGamesPlatform.Instance.localUser.authenticated == false)
         {
             Social.localUser.Authenticate((bool success ) => {
-                
+                Debug.Log(success);
             });
         }
     }

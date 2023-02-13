@@ -83,6 +83,7 @@ public class DataManager : MonoSingleton<DataManager>
         {
             BestScore = CurrentScore;
             SecurityPlayerPrefs.SetInt("bestScore", BestScore);
+            leaderBoard.AddLeaderboard(BestScore);
         }
 
         SecurityPlayerPrefs.SetInt("star", Star);
