@@ -9,13 +9,14 @@ public class SkinPanel : MonoBehaviour
     [SerializeField] private GameObject parentGroup;
     [SerializeField] private SpriteRenderer ballSr;
     [SerializeField] private List<SkinButton> skinBtnList = new List<SkinButton>();
+    [SerializeField] private SkinPopup skinPopup;
 
     private const string SKIN_KEY_PREFIX = "Skin";
     private const string MOUNT_SKIN_KEY = "MountSkin";
 
     private void Start()
     {
-        ResetSkin();
+        //ResetSkin();
 
         for (int i = 0; i < parentGroup.transform.childCount; i++)
         {
@@ -59,20 +60,26 @@ public class SkinPanel : MonoBehaviour
         }
         else
         {
-            int cost = skinBtnList[skinIndex].cost;
-            if (DataManager.Instance.Star >= cost)
+            skinPopup.gameObject.SetActive(true);
+            skinPopup.buyAction += () =>
             {
-                DataManager.Instance.MinusStar(skinBtnList[skinIndex].cost);
-                SecurityPlayerPrefs.SetBool(GetSkinKey(skinIndex), true);
-                skinBtnList[skinIndex].BuySkinDirect();
-                MountSkin(skinIndex);
+                int cost = skinBtnList[skinIndex].cost;
+                if (DataManager.Instance.Star >= cost)
+                {
+                    DataManager.Instance.MinusStar(skinBtnList[skinIndex].cost);
+                    SecurityPlayerPrefs.SetBool(GetSkinKey(skinIndex), true);
+                    skinBtnList[skinIndex].BuySkinDirect();
+                    MountSkin(skinIndex);
 
-                Debug.Log("Skin purchased");
-            }
-            else
-            {
-                Debug.Log("Not enough stars");
-            }
+                    Debug.Log("Skin purchased");
+                }
+                else
+                {
+                    Debug.Log("Not enough stars");
+                }
+
+                skinPopup.gameObject.SetActive(false);
+            };
         }
     }
 
