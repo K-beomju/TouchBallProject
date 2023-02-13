@@ -11,6 +11,7 @@ public class UiManager : MonoSingleton<UiManager>
     public StarGroupPanel starGroup;
     public HomeButton home;
     public BackGroundMove backGroundMove;
+    public EndButtonGroup endButtonGroup;
 
     public GameObject itemGroup;
     public GameObject item;
@@ -27,8 +28,8 @@ public class UiManager : MonoSingleton<UiManager>
 
     public void GameOverUI()
     {
-        home.gameObject.SetActive(true);
-        home.ShowHomeButton();
+        endButtonGroup.gameObject.SetActive(true);
+        endButtonGroup.EndShowButton();
         currentScore.GameOverDirect();
         itemGroup.SetActive(false);
         item.SetActive(false);
