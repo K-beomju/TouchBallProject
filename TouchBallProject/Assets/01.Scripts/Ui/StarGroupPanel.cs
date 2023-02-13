@@ -29,7 +29,7 @@ public class StarGroupPanel : MonoBehaviour
     public void ChangeSkinPos(bool change)
     {
         if(change)
-        rtm.anchoredPosition = new Vector2(0, -200);
+        rtm.anchoredPosition = new Vector2(0, -240);
         else
         rtm.anchoredPosition = Vector2.zero;
     }
