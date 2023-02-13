@@ -9,8 +9,11 @@ public class CurrentScoreGroup : MonoBehaviour
     [SerializeField] private Text currentScoreText;
     [SerializeField] private Text currentDescText;
     [SerializeField] private Text goldScoreText;
+    [SerializeField] private Text normalScoreText;
 
     private RectTransform getGoldTextRtm;
+    private RectTransform getNormalTextRtm;
+
     private CanvasGroup canvasGroup;
     private RectTransform rtm;
     private Sequence gameOverSq;
@@ -22,6 +25,7 @@ public class CurrentScoreGroup : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
         rtm = GetComponent<RectTransform>();
         getGoldTextRtm = goldScoreText.GetComponent<RectTransform>();
+        getNormalTextRtm = normalScoreText.GetComponent<RectTransform>();
     }
 
     public void ShowCurrentScore(int currentScore)
@@ -34,7 +38,6 @@ public class CurrentScoreGroup : MonoBehaviour
         canvasGroup.DOFade(1, 0.5f);
     }
 
-    [ContextMenu("ChangeGoldTextColor")]
     public void ChangeGoldTextColor()
     {
         getGoldTextRtm.gameObject.SetActive(true);
@@ -45,6 +48,17 @@ public class CurrentScoreGroup : MonoBehaviour
 
         currentScoreText.DOColor(Color.yellow, 0.3f).OnComplete(() => currentScoreText.DOColor(Color.white, 0.3f));
     }
+
+    public void NoramlTextColor()
+    {
+        getNormalTextRtm.gameObject.SetActive(true);
+        normalScoreText.DOFade(1, 0);
+        getNormalTextRtm.transform.position = ballObj.position;
+        getNormalTextRtm.DOAnchorPosY(getNormalTextRtm.anchoredPosition.y + 100, 0.5f);
+        normalScoreText.DOFade(0, 1f);
+    }
+
+
 
 
     public void GameOverDirect()

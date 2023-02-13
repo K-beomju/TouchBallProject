@@ -100,7 +100,10 @@ public class Ball : MonoBehaviour
                 press.ChangePressTransform();
 
             if (!press.isGoldPress)
+            {
                 DataManager.Instance.CurrentAddScore();
+                UiManager.Instance.currentScore.NoramlTextColor();
+            }
             else
             {
                 DataManager.Instance.CurrentAddScore(3);
