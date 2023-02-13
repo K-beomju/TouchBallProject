@@ -22,31 +22,32 @@ public class DataManager : MonoSingleton<DataManager>
     public int BestScore
     {
         get => _bestScore;
-        set 
+        set
         {
             _bestScore = value;
             UiManager.Instance.bestScore.ShowBestScore(value);
-        } 
-        
+        }
+
     }
 
     private int _star;
     public int Star
     {
         get => _star;
-        set 
+        set
         {
             _star = value;
             UiManager.Instance.starGroup.ShowStar(value);
-        } 
+
+        }
     }
 
-    private void Awake() 
+    private void Awake()
     {
         if (SecurityPlayerPrefs.HasKey("bestScore"))
-        BestScore = SecurityPlayerPrefs.GetInt("bestScore", default);
-        if(SecurityPlayerPrefs.HasKey("star"))
-        Star = SecurityPlayerPrefs.GetInt("star", default);
+            BestScore = SecurityPlayerPrefs.GetInt("bestScore", default);
+        if (SecurityPlayerPrefs.HasKey("star"))
+            Star = SecurityPlayerPrefs.GetInt("star", default);
         leaderBoard = GetComponent<LeaderBoard>();
     }
 
@@ -69,9 +70,9 @@ public class DataManager : MonoSingleton<DataManager>
 
     public void UpdateBestScore()
     {
-        if(SecurityPlayerPrefs.HasKey("bestScore"))
+        if (SecurityPlayerPrefs.HasKey("bestScore"))
         {
-            if(CurrentScore > SecurityPlayerPrefs.GetInt("bestScore", default))
+            if (CurrentScore > SecurityPlayerPrefs.GetInt("bestScore", default))
             {
                 BestScore = CurrentScore;
                 SecurityPlayerPrefs.SetInt("bestScore", BestScore);
