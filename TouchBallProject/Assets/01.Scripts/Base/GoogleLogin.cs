@@ -5,7 +5,7 @@ using GooglePlayGames;
 
 public class GoogleLogin : MonoBehaviour
 {
-    private void Start() 
+    private void Awake() 
     {
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
