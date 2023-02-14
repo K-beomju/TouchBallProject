@@ -15,6 +15,7 @@ public class UiManager : MonoSingleton<UiManager>
 
     public GameObject itemGroup;
     public GameObject item;
+    public GameObject InterstitialRetryPopup;
 
     [SerializeField] private CanvasGroup titleGroup;
 
@@ -33,9 +34,9 @@ public class UiManager : MonoSingleton<UiManager>
         currentScore.GameOverDirect();
         itemGroup.SetActive(false);
         item.SetActive(false);
-        ItemManager.Instance.starList.ForEach(x => x.GameOverStar());
         backGroundMove.backStart = false;
 
     }
+
 
 }

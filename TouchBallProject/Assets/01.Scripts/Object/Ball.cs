@@ -17,8 +17,13 @@ public class Ball : MonoBehaviour
     [SerializeField] private Press press;
     [SerializeField] private BackGroundMove backGroundMove;
 
-    private Rigidbody2D rb;
-    private bool isStart = true;
+    public Rigidbody2D rb { get; set; }
+    private bool isStart = true;        // 처음 게임 시작 판별
+    public bool isMove = false;         // 움직임 제어
+    public bool isRotate = true;        // 처음 로테이션 제어 
+    public bool isRetry = false;        // 리트라이를 했는지 안했는지 판별
+    public bool isDone = false;         // 리트라이 했는지 판별하여 게임 종료
+
     [SerializeField] private Ease ease;
 
     private void Awake()
@@ -26,7 +31,7 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Start() 
+    private void Start()
     {
         transform.DOMoveY(0.5f, 2).SetEase(ease).SetLoops(-1, LoopType.Yoyo);
     }
@@ -39,48 +44,71 @@ public class Ball : MonoBehaviour
             {
                 if (isStart)
                 {
-                    DOTween.KillAll();
                     isStart = false;
+                    isRotate = false;
+                    isMove = true;
+
+                    DOTween.KillAll();
                     press.gameObject.SetActive(true);
-                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                     UiManager.Instance.GameStartUI();
+
+                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 }
+                if (isRetry)
+                {
+                    isMove = true;
+                    isDone = true;
+                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    isRetry = false;
+                }
+
                 rb.velocity = new Vector2(0, jumpSpeed);
                 SoundManager.Instance.PlayFXSound("Jump");
             }
         }
 
-        if(isStart)
-        transform.Rotate(new Vector3(0,0,-30 * Time.deltaTime));
+        if (isRotate)
+            transform.Rotate(new Vector3(0, 0, -30 * Time.deltaTime));
     }
 
     private void FixedUpdate()
     {
-        if (!isStart)
+        if (isMove)
         {
             transform.Translate(Vector3.right * (dirSpeed * Time.deltaTime * moveSpeed), Space.World);
-            transform.Rotate(new Vector3(0,0, 30 * rotateSpeed * Time.deltaTime));
+            transform.Rotate(new Vector3(0, 0, 30 * rotateSpeed * Time.deltaTime));
         }
 
         if (cameraRs.OutScreenBall(transform.position))
         {
             gameObject.SetActive(false);
             Instantiate(dieEffect, transform.position, Quaternion.identity);
-            press.GameOverDirect();
-            UiManager.Instance.GameOverUI();
-            DataManager.Instance.UpdateBestScore();
             SoundManager.Instance.PlayFXSound("Dead");
+            ItemManager.Instance.starList.ForEach(x => x.GameOverStar());
+            isMove = false;
+
+            if (isDone)
+            {
+                press.GameOverDirect();
+                UiManager.Instance.GameOverUI();
+                DataManager.Instance.UpdateBestScore();
+            }
+            else
+            {
+                UiManager.Instance.InterstitialRetryPopup.SetActive(true);
+
+            }
 
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) 
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Star"))
+        if (other.CompareTag("Star"))
         {
             SoundManager.Instance.PlayFXSound("Star");
             other.GetComponent<Star>().GoStarPanel();
-        }    
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -112,8 +140,8 @@ public class Ball : MonoBehaviour
 
             if (DataManager.Instance.CurrentScore % 5 == 0)
             {
-                if(SecurityPlayerPrefs.GetBool("Vibrate", true))
-                Handheld.Vibrate();
+                if (SecurityPlayerPrefs.GetBool("Vibrate", true))
+                    Handheld.Vibrate();
 
                 backGroundMove.UpBackSpeed();
             }
@@ -128,7 +156,7 @@ public class Ball : MonoBehaviour
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
         eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
- 
+
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
         return results.Count > 0;
