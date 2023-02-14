@@ -74,6 +74,7 @@ public class CurrentScoreGroup : MonoBehaviour
             currentDescText.DOText("Best Score!", 1, true, ScrambleMode.All).SetDelay(2).OnComplete(() => 
             {
                 confettiPs.Play();
+                SoundManager.Instance.PlayFXSound("BestScore");
             });
         }
 

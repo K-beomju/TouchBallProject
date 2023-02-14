@@ -101,13 +101,17 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     public void PlayBGMSound(string name)
     {
-        if (bgmAudioSourece == null)
+        if (SecurityPlayerPrefs.GetBool("Sound", true))
         {
-            bgmAudioSourece = MakeAudioSourceObject("BGMObject");
-        }
 
-        SetAudioSource(bgmAudioSourece, GetBGMSound(name), true, BGMVolume, false);
-        bgmAudioSourece.Play();
+            if (bgmAudioSourece == null)
+            {
+                bgmAudioSourece = MakeAudioSourceObject("BGMObject");
+            }
+
+            SetAudioSource(bgmAudioSourece, GetBGMSound(name), true, BGMVolume, false);
+            bgmAudioSourece.Play();
+        }
     }
 
     public void PlayFXSound(string name)
