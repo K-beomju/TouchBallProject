@@ -40,10 +40,9 @@ public class InterstitialRetryPopup : MonoBehaviour
         }
     }
 
-    
+    // 전면 광고보게 하고 실행하게 
     public void InterstitialRetry()
     {
-        
         ball.isRotate = true;
         ball.isRetry = true;
         ball.gameObject.SetActive(true);
@@ -57,9 +56,10 @@ public class InterstitialRetryPopup : MonoBehaviour
 
     public void EndGame()
     {
+        canvasGroup.DOFade(0,1).OnComplete(() => gameObject.SetActive(false));
+        canvasGroup.interactable = false;
         press.GameOverDirect();
         UiManager.Instance.GameOverUI();
         DataManager.Instance.UpdateBestScore();
-        gameObject.SetActive(false);
     }
 }
