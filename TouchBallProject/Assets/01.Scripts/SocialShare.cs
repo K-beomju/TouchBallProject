@@ -25,7 +25,7 @@ public class SocialShare : MonoBehaviour
         Destroy(ss);
 
         new NativeShare().AddFile(filePath)
-            .SetSubject("Subject goes here").SetText("Hello world!").SetUrl("https://github.com/yasirkula/UnityNativeShare")
+            .SetSubject(DataManager.Instance.BestScore.ToString()).SetText("#High Earth 신기록!").SetUrl("https://play.google.com/apps/internaltest/4701522020487134340")
             .SetCallback((result, shareTarget) => Debug.Log("Share result: " + result + ", selected app: " + shareTarget))
             .Share();
 

@@ -85,7 +85,7 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Press"))
+        if (other.gameObject.CompareTag("Press") && !press.isChange)
         {
             SoundManager.Instance.PlayFXSound("Press");
             DataManager.Instance.AddStar();
