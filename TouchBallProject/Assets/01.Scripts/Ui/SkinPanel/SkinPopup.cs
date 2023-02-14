@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class SkinPopup : MonoBehaviour
 {
     public Action buyAction = () => {};
+    public Text noStarText;
 
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
@@ -21,6 +22,8 @@ public class SkinPopup : MonoBehaviour
     {
         buyAction = null;
         gameObject.SetActive(false);
+        noStarText.gameObject.SetActive(false);
+
     }
 
 

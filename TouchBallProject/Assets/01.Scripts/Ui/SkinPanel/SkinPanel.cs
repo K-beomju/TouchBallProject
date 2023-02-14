@@ -60,7 +60,9 @@ public class SkinPanel : MonoBehaviour
         }
         else
         {
+            SoundManager.Instance.PlayButtonSound();
             skinPopup.gameObject.SetActive(true);
+
             skinPopup.buyAction += () =>
             {
                 int cost = skinBtnList[skinIndex].cost;
@@ -70,15 +72,15 @@ public class SkinPanel : MonoBehaviour
                     SecurityPlayerPrefs.SetBool(GetSkinKey(skinIndex), true);
                     skinBtnList[skinIndex].BuySkinDirect();
                     MountSkin(skinIndex);
+                    skinPopup.gameObject.SetActive(false);
 
                     Debug.Log("Skin purchased");
                 }
                 else
                 {
+                    skinPopup.noStarText.gameObject.SetActive(true);
                     Debug.Log("Not enough stars");
                 }
-
-                skinPopup.gameObject.SetActive(false);
             };
         }
     }
