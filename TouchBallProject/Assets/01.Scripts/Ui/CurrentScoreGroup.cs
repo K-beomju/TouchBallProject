@@ -19,6 +19,7 @@ public class CurrentScoreGroup : MonoBehaviour
     private Sequence gameOverSq;
 
     [SerializeField] private Transform ballObj;
+    [SerializeField] private ParticleSystem confettiPs;
 
     private void Awake()
     {
@@ -70,7 +71,10 @@ public class CurrentScoreGroup : MonoBehaviour
 
         if (DataManager.Instance.CurrentScore > DataManager.Instance.BestScore)
         {
-            currentDescText.DOText("Best Score!", 1, true, ScrambleMode.All).SetDelay(2);
+            currentDescText.DOText("Best Score!", 1, true, ScrambleMode.All).SetDelay(2).OnComplete(() => 
+            {
+                confettiPs.Play();
+            });
         }
 
     }
