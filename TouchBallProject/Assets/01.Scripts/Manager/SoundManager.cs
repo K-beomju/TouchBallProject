@@ -135,4 +135,9 @@ public class SoundManager : MonoSingleton<SoundManager>
         }
     }
 
+    public void PlayButtonSound()
+    {
+        PlayFXSound("Button");
+    }
+
 }
