@@ -44,7 +44,7 @@ public class DataManager : MonoSingleton<DataManager>
 
     private void Awake()
     {
-        SecurityPlayerPrefs.DeleteAll();
+        //SecurityPlayerPrefs.DeleteAll();
 
         if (SecurityPlayerPrefs.HasKey("bestScore"))
             BestScore = SecurityPlayerPrefs.GetInt("bestScore", default);

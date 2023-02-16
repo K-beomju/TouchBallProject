@@ -12,7 +12,27 @@ public class HomeButton : MonoBehaviour
     private void Awake() 
     {
         button = GetComponent<Button>();
-        button.onClick.AddListener(() => LoadHome());
+        button.onClick.AddListener(() => ShowAd());
+
+        if(!SecurityPlayerPrefs.HasKey("CountAd"))
+        {
+            SecurityPlayerPrefs.SetInt("CountAd", 0);
+        }
+    }
+    
+    public void ShowAd()
+    {
+        int count = SecurityPlayerPrefs.GetInt("CountAd", default);
+        ++count;
+
+        Debug.Log(count);
+
+        if(count % 2 == 0)
+        AdManager.Instance.ShowInterstitial(() => LoadHome());
+        else
+        LoadHome();
+
+        SecurityPlayerPrefs.SetInt("CountAd", count);
     }
 
     public void LoadHome()
