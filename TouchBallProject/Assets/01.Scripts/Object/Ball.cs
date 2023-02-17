@@ -38,7 +38,7 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             if (!IsPointerOverUIObject())
             {
@@ -87,17 +87,17 @@ public class Ball : MonoBehaviour
             ItemManager.Instance.starList.ForEach(x => x.GameOverStar());
             isMove = false;
 
-            if (isDone)
-            {
                 press.GameOverDirect();
                 UiManager.Instance.GameOverUI();
                 DataManager.Instance.UpdateBestScore();
-            }
-            else
-            {
-                UiManager.Instance.InterstitialRetryPopup.SetActive(true);
+            // if (isDone)
+            // {
+            // }
+            // else
+            // {
+            //     UiManager.Instance.InterstitialRetryPopup.SetActive(true);
 
-            }
+            // }
 
         }
     }
