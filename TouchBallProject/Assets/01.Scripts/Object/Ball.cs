@@ -87,17 +87,17 @@ public class Ball : MonoBehaviour
             ItemManager.Instance.starList.ForEach(x => x.GameOverStar());
             isMove = false;
 
+            if (isDone)
+            {
                 press.GameOverDirect();
                 UiManager.Instance.GameOverUI();
                 DataManager.Instance.UpdateBestScore();
-            // if (isDone)
-            // {
-            // }
-            // else
-            // {
-            //     UiManager.Instance.InterstitialRetryPopup.SetActive(true);
+            }
+            else
+            {
+                UiManager.Instance.InterstitialRetryPopup.SetActive(true);
 
-            // }
+            }
 
         }
     }

@@ -6,21 +6,17 @@ using DG.Tweening;
 
 public class InterstitialRetryPopup : MonoBehaviour
 {
-    [SerializeField] private Button retryButton;
-    [SerializeField] private Button exitButton;
+
     [SerializeField] private float speed;
     [SerializeField] private Slider slider;
     [SerializeField] private CanvasGroup canvasGroup;
     private bool isGameOver = false;
+    private bool isRetry = false;
 
     public Ball ball;
     public Press press;
+    public Button retryButton;
 
-    private void Awake()
-    {
-        retryButton.onClick.AddListener(() => InterstitialRetry());
-        exitButton.onClick.AddListener(() => EndGame());
-    }
 
     private void OnEnable()
     {
@@ -29,7 +25,7 @@ public class InterstitialRetryPopup : MonoBehaviour
 
     private void Update()
     {
-        if (slider.value <= 0 && !isGameOver)
+        if (slider.value <= 0 && !isGameOver && !isRetry)
         {
             EndGame();
             isGameOver = true;
@@ -43,6 +39,8 @@ public class InterstitialRetryPopup : MonoBehaviour
     // 전면 광고보게 하고 실행하게 
     public void InterstitialRetry()
     {
+        retryButton.interactable = false;
+        isRetry = true;
         AdManager.Instance.ShowInterstitial(() => RetryGame());
     }
 
@@ -57,6 +55,7 @@ public class InterstitialRetryPopup : MonoBehaviour
         ball.rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         gameObject.SetActive(false);
         press.transform.position = new Vector3(press.transform.position.x, 0, 0);
+        isRetry = false;
 
     }
 

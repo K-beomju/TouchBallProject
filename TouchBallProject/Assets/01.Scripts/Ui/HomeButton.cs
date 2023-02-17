@@ -7,12 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class HomeButton : MonoBehaviour
 {
-    private Button button;
 
     private void Awake() 
     {
-        button = GetComponent<Button>();
-        button.onClick.AddListener(() => ShowAd());
 
         if(!SecurityPlayerPrefs.HasKey("CountAd"))
         {
