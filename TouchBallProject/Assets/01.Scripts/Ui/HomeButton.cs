@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class HomeButton : MonoBehaviour
 {
-
+    [SerializeField] private Button homeButton;
     private void Awake() 
     {
 
@@ -22,14 +22,13 @@ public class HomeButton : MonoBehaviour
         int count = SecurityPlayerPrefs.GetInt("CountAd", default);
         ++count;
 
-        Debug.Log(count);
-
-        if(count % 2 == 0)
+        if(count % 5 == 0)
         AdManager.Instance.ShowInterstitial(() => LoadHome());
         else
         LoadHome();
 
         SecurityPlayerPrefs.SetInt("CountAd", count);
+        homeButton.interactable = false;
     }
 
     public void LoadHome()
