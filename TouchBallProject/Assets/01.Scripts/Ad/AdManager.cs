@@ -7,9 +7,14 @@ using GoogleMobileAds.Api;
 public class AdManager : MonoSingleton<AdManager>
 {
     private InterstitialAd interstitial;
-    public Action action = () => {};
+    public Action loadAction = () => {};
 
-    private void RequestInterstitial()
+    protected override void Start()
+    {
+        MobileAds.Initialize(initStatus => RequestInterstitial());
+    }
+
+    public void RequestInterstitial()
     {
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-1077488135922668/4067808726";
@@ -19,41 +24,32 @@ public class AdManager : MonoSingleton<AdManager>
         string adUnitId = "unexpected_platform";
 #endif
 
-        // Initialize an InterstitialAd.
         this.interstitial = new InterstitialAd(adUnitId);
-
-        // Called when the ad is closed.
         this.interstitial.OnAdClosed += HandleOnAdClosed;
-
-        // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
-        // Load the interstitial with the request.
         this.interstitial.LoadAd(request);
     }
 
     public void HandleOnAdClosed(object sender, EventArgs args)
     {
-        if(action != null)
+        if(loadAction != null)
         {
-            action();
-            action = null;
+            loadAction();
+            loadAction = null;
         }
     }
     
-    public void ShowInterstitial(Action _action)
+    public void ShowInterstitialAd(Action action = null)
     {
-        RequestInterstitial();
-        StartCoroutine(ShowInterstitial());
-        action = _action;
+        if (action != null)
+            loadAction = action;
 
-        IEnumerator ShowInterstitial()
-        {
-            while(!this.interstitial.IsLoaded())
-            {
-                yield return new WaitForSeconds(0.2f);
-            }
+        ShowRewardedAd();
+    }
+
+    private void ShowRewardedAd()
+    {
+        if (this.interstitial.IsLoaded())
             this.interstitial.Show();
-        }
-        
     }
 }

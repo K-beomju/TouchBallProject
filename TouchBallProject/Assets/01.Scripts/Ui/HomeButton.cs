@@ -23,7 +23,7 @@ public class HomeButton : MonoBehaviour
         ++count;
 
         if(count % 5 == 0)
-        AdManager.Instance.ShowInterstitial(() => LoadHome());
+        AdManager.Instance.ShowInterstitialAd(() => LoadHome());
         else
         LoadHome();
 
@@ -34,5 +34,7 @@ public class HomeButton : MonoBehaviour
     public void LoadHome()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        AdManager.Instance.RequestInterstitial();
+
     }
 }

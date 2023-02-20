@@ -18,7 +18,7 @@ public class SkinPanel : MonoBehaviour
     private void Start()
     {
         //ResetSkin();
-        rewardStarButton.onClick.AddListener(() =>  AdManager.Instance.ShowInterstitial(() => GetRewardAd()));
+        rewardStarButton.onClick.AddListener(() =>  AdManager.Instance.ShowInterstitialAd(() => GetRewardAd()));
 
         for (int i = 0; i < parentGroup.transform.childCount; i++)
         {
@@ -130,6 +130,7 @@ public class SkinPanel : MonoBehaviour
     public void GetRewardAd()
     {
         DataManager.Instance.AddStar(100);
+        AdManager.Instance.RequestInterstitial();
     }
 
 
