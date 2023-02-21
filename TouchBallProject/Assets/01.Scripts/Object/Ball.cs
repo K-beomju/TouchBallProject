@@ -54,7 +54,7 @@ public class Ball : MonoBehaviour
     {
         if (IsPointerOverUIObject()) return;
 
-        if (!isDragShot)
+        if (!isDragShot && !isStart)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -97,23 +97,27 @@ public class Ball : MonoBehaviour
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 isRetry = false;
             }
-            SoundManager.Instance.PlayFXSound("Jump");
-
 
             rb.velocity = new Vector2(0, jumpSpeed);
+            SoundManager.Instance.PlayFXSound("Jump");
 
             endPoint = mainCam.ScreenToWorldPoint(Input.mousePosition);
             endPoint.z = 15;
 
 
-            if (IsDrag() && !isDragShot)
+            if (IsDrag())
             {
-                UiManager.Instance.dragLineGroup.ReloadDrag();
-                force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x),
-                                    Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y));
-                rb.AddForce(force * power, ForceMode2D.Impulse);
-                dragLine.EndPoint();
+                if (!isDragShot && !isStart)
+                {
+                    SoundManager.Instance.PlayFXSound("SlingShot");
+                    UiManager.Instance.dragLineGroup.ReloadDrag();
+                    force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x),
+                                        Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y));
+                    rb.AddForce(force * power, ForceMode2D.Impulse);
+                    dragLine.EndPoint();
+                }
             }
+          
 
 
         }
