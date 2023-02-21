@@ -139,6 +139,7 @@ public class Ball : MonoBehaviour
         if (cameraRs.OutScreenBall(transform.position))
         {
             gameObject.SetActive(false);
+            dragLine.gameObject.SetActive(false);
             Instantiate(dieEffect, transform.position, Quaternion.identity);
             SoundManager.Instance.PlayFXSound("Dead");
             ItemManager.Instance.starList.ForEach(x => x.GameOverStar());
