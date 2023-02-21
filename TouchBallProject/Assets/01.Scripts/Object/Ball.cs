@@ -23,6 +23,7 @@ public class Ball : MonoBehaviour
     public bool isRotate = true;        // 처음 로테이션 제어 
     public bool isRetry = false;        // 리트라이를 했는지 안했는지 판별
     public bool isDone = false;         // 리트라이 했는지 판별하여 게임 종료
+    public bool isDragShot = false;
 
     [SerializeField] private Ease ease;
 
@@ -53,20 +54,24 @@ public class Ball : MonoBehaviour
     {
         if (IsPointerOverUIObject()) return;
 
-        if (Input.GetMouseButtonDown(0))
+        if (!isDragShot)
         {
-            startPoint = mainCam.ScreenToWorldPoint(Input.mousePosition);
-            startPoint.z = 15;
+            if (Input.GetMouseButtonDown(0))
+            {
+                startPoint = mainCam.ScreenToWorldPoint(Input.mousePosition);
+                startPoint.z = 15;
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                currentPoint = mainCam.ScreenToWorldPoint(Input.mousePosition);
+                currentPoint.z = 15;
+
+                if (IsDrag() && !isDragShot)
+                    dragLine.RenderLine(startPoint, currentPoint);
+            }
         }
 
-        if (Input.GetMouseButton(0))
-        {
-            currentPoint = mainCam.ScreenToWorldPoint(Input.mousePosition);
-            currentPoint.z = 15;
-
-            if (IsDrag())
-                dragLine.RenderLine(startPoint, currentPoint);
-        }
 
 
 
@@ -101,9 +106,9 @@ public class Ball : MonoBehaviour
             endPoint.z = 15;
 
 
-            if (IsDrag())
+            if (IsDrag() && !isDragShot)
             {
-
+                UiManager.Instance.dragLineGroup.ReloadDrag();
                 force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x),
                                     Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y));
                 rb.AddForce(force * power, ForceMode2D.Impulse);
