@@ -26,9 +26,22 @@ public class Ball : MonoBehaviour
 
     [SerializeField] private Ease ease;
 
+    [SerializeField] private Vector2 minPower;
+    [SerializeField] private Vector2 maxPower;
+    [SerializeField] private float power;
+
+    [SerializeField] private DragLine dragLine;
+    private Vector3 startPoint;
+    private Vector3 currentPoint;
+    private Vector3 endPoint;
+    private Camera mainCam;
+    private Vector2 force;
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        mainCam = Camera.main;
     }
 
     private void Start()
@@ -38,38 +51,73 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        if (IsPointerOverUIObject()) return;
+
+        if (Input.GetMouseButtonDown(0))
         {
-            if (!IsPointerOverUIObject())
+            startPoint = mainCam.ScreenToWorldPoint(Input.mousePosition);
+            startPoint.z = 15;
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            currentPoint = mainCam.ScreenToWorldPoint(Input.mousePosition);
+            currentPoint.z = 15;
+
+            if (IsDrag())
+                dragLine.RenderLine(startPoint, currentPoint);
+        }
+
+
+
+
+        if (Input.GetMouseButtonUp(0) || Input.GetKeyDown(KeyCode.Space))
+        {
+            if (isStart)
             {
-                if (isStart)
-                {
-                    isStart = false;
-                    isRotate = false;
-                    isMove = true;
+                isStart = false;
+                isRotate = false;
+                isMove = true;
 
-                    DOTween.KillAll();
-                    press.gameObject.SetActive(true);
-                    UiManager.Instance.GameStartUI();
+                DOTween.KillAll();
+                press.gameObject.SetActive(true);
+                UiManager.Instance.GameStartUI();
 
-                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                }
-                if (isRetry)
-                {
-                    isMove = true;
-                    isDone = true;
-                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                    isRetry = false;
-                }
-
-                rb.velocity = new Vector2(0, jumpSpeed);
-                SoundManager.Instance.PlayFXSound("Jump");
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             }
+            if (isRetry)
+            {
+                isMove = true;
+                isDone = true;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                isRetry = false;
+            }
+            SoundManager.Instance.PlayFXSound("Jump");
+
+
+            rb.velocity = new Vector2(0, jumpSpeed);
+
+            endPoint = mainCam.ScreenToWorldPoint(Input.mousePosition);
+            endPoint.z = 15;
+
+
+            if (IsDrag())
+            {
+
+                force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x),
+                                    Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y));
+                rb.AddForce(force * power, ForceMode2D.Impulse);
+                dragLine.EndPoint();
+            }
+
+
         }
 
         if (isRotate)
             transform.Rotate(new Vector3(0, 0, -30 * Time.deltaTime));
     }
+
+    public bool IsDrag() => Vector2.Distance(startPoint, currentPoint) > 0.5f;
 
     private void FixedUpdate()
     {
