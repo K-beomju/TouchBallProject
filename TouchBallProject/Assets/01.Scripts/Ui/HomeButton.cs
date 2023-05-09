@@ -22,10 +22,10 @@ public class HomeButton : MonoBehaviour
         int count = SecurityPlayerPrefs.GetInt("CountAd", default);
         ++count;
 
-        if(count % 5 == 0)
-        AdManager.Instance.ShowInterstitialAd(() => LoadHome());
+        if (count % 5 == 0)
+            AdManager.Instance.ShowInterstitialAd(() => LoadHome());
         else
-        LoadHome();
+            LoadHome();
 
         SecurityPlayerPrefs.SetInt("CountAd", count);
         homeButton.interactable = false;

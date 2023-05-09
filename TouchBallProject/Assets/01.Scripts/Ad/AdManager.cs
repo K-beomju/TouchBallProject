@@ -17,7 +17,7 @@ public class AdManager : MonoSingleton<AdManager>
     public void RequestInterstitial()
     {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-1077488135922668/4067808726";
+        string adUnitId = "ca-app-pub-1077488135922668/4441277383";
 #elif UNITY_IPHONE
         string adUnitId = "ca-app-pub-3940256099942544/4411468910";
 #else
