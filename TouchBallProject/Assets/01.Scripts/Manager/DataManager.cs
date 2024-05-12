@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DataManager : MonoSingleton<DataManager>
 {
-    private LeaderBoard leaderBoard;
-
     private int _currentScore;
     public int CurrentScore
     {
@@ -49,7 +47,7 @@ public class DataManager : MonoSingleton<DataManager>
             BestScore = SecurityPlayerPrefs.GetInt("bestScore", default);
         if (SecurityPlayerPrefs.HasKey("star"))
             Star = SecurityPlayerPrefs.GetInt("star", default);
-        leaderBoard = GetComponent<LeaderBoard>();
+        //leaderBoard = GetComponent<LeaderBoard>();
     }
 
     public void CurrentAddScore(int value = 1)
@@ -77,14 +75,14 @@ public class DataManager : MonoSingleton<DataManager>
             {
                 BestScore = CurrentScore;
                 SecurityPlayerPrefs.SetInt("bestScore", BestScore);
-                leaderBoard.AddLeaderboard(BestScore);
+                ///leaderBoard.AddLeaderboard(BestScore);
             }
         }
         else
         {
             BestScore = CurrentScore;
             SecurityPlayerPrefs.SetInt("bestScore", BestScore);
-            leaderBoard.AddLeaderboard(BestScore);
+            //leaderBoard.AddLeaderboard(BestScore);
         }
 
         SecurityPlayerPrefs.SetInt("star", Star);

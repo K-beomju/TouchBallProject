@@ -17,7 +17,6 @@ public class ItemManager : MonoSingleton<ItemManager>
     private Ball ball;
     [SerializeField] private Star star;
     private Camera mainCam;
-
     private WaitForSeconds delay = new WaitForSeconds(10);
     private float startTime;
     private float cooldown = 10;
