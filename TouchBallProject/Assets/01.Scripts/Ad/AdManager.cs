@@ -14,6 +14,7 @@ public class AdManager : MonoSingleton<AdManager>
 
     public bool isTest = true;
     private InterstitialAd _interstitialAd;
+    private Action interstitialAdSuccess;
 
     protected override void Start()
     {
@@ -77,12 +78,19 @@ public class AdManager : MonoSingleton<AdManager>
     /// <summary>
     /// 2.전면 광고 표시
     /// </summary>
-    public void ShowInterstitialAd()
+    public void ShowInterstitialAd(Action action = null)
     {
+        LoadInterstitialAd();
         if (_interstitialAd != null && _interstitialAd.CanShowAd())
         {
             Debug.Log("Showing interstitial ad.");
             _interstitialAd.Show();
+            if(action != null)
+            _interstitialAd.OnAdFullScreenContentClosed += () =>
+            {
+                action();
+            };
+
         }
         else
         {
@@ -129,27 +137,6 @@ public class AdManager : MonoSingleton<AdManager>
             // 광고 재로드 
             Debug.LogError("Interstitial ad failed to open full screen content " +
                            "with error : " + error);
-        };
-    }
-
-    private void RegisterReloadHandler(InterstitialAd interstitialAd)
-    {
-        // Raised when the ad closed full screen content.
-        interstitialAd.OnAdFullScreenContentClosed += () =>
-    {
-        Debug.Log("Interstitial Ad full screen content closed.");
-
-        // Reload the ad so that we can show another as soon as possible.
-        LoadInterstitialAd();
-    };
-        // Raised when the ad failed to open full screen content.
-        interstitialAd.OnAdFullScreenContentFailed += (AdError error) =>
-        {
-            Debug.LogError("Interstitial ad failed to open full screen content " +
-                           "with error : " + error);
-
-            // Reload the ad so that we can show another as soon as possible.
-            LoadInterstitialAd();
         };
     }
 

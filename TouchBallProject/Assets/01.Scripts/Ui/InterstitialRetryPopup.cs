@@ -41,7 +41,7 @@ public class InterstitialRetryPopup : MonoBehaviour
     {
         retryButton.interactable = false;
         isRetry = true;
-        //AdManager.Instance.ShowInterstitialAd(() => RetryGame());
+        AdManager.Instance.ShowInterstitialAd(() => RetryGame());
     }
 
     public void RetryGame()
@@ -56,9 +56,6 @@ public class InterstitialRetryPopup : MonoBehaviour
         gameObject.SetActive(false);
         press.transform.position = new Vector3(press.transform.position.x, 0, 0);
         isRetry = false;
-        //AdManager.Instance.RequestInterstitial();
-
-
     }
 
     public void EndGame()

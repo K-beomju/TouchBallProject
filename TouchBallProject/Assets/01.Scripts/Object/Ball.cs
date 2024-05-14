@@ -24,6 +24,7 @@ public class Ball : MonoBehaviour
     public bool isRetry = false;        // 리트라이를 했는지 안했는지 판별
     public bool isDone = false;         // 리트라이 했는지 판별하여 게임 종료
     public bool isDragShot = false;
+    public bool LockDrag = true;
 
     [SerializeField] private Ease ease;
 
@@ -54,6 +55,7 @@ public class Ball : MonoBehaviour
     {
         if (IsPointerOverUIObject()) return;
 
+        if(!LockDrag)
         if (!isDragShot && !isStart)
         {
             if (Input.GetMouseButtonDown(0))
@@ -105,6 +107,7 @@ public class Ball : MonoBehaviour
             endPoint.z = 15;
 
 
+            if(!LockDrag)
             if (IsDrag())
             {
                 if (!isDragShot && !isStart)
