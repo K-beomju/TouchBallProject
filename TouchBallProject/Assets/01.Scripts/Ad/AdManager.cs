@@ -14,13 +14,13 @@ public class AdManager : MonoSingleton<AdManager>
 
     public bool isTest = true;
     private InterstitialAd _interstitialAd;
-    private Action interstitialAdSuccess;
 
     protected override void Start()
     {
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize((InitializationStatus initStatus) =>
         {
+            LoadInterstitialAd();
             // This callback is called once the MobileAds SDK is initialized.
         });
     }
