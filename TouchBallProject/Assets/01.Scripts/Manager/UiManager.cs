@@ -12,17 +12,17 @@ public class UiManager : MonoSingleton<UiManager>
     public HomeButton home;
     public BackGroundMove backGroundMove;
     public EndButtonGroup endButtonGroup;
-    public DragLineGroup dragLineGroup;
 
     public GameObject itemGroup;
     public GameObject item;
     public GameObject InterstitialRetryPopup;
 
+    public bool ShowPopup {get; set;} = false;
+
     [SerializeField] private CanvasGroup titleGroup;
 
     public void GameStartUI()
     {
-        dragLineGroup.gameObject.SetActive(true);
         currentScore.gameObject.SetActive(true);
         currentScore.FadeIn();
         backGroundMove.backStart = true;
@@ -31,7 +31,6 @@ public class UiManager : MonoSingleton<UiManager>
 
     public void GameOverUI()
     {
-        dragLineGroup.gameObject.SetActive(false);
         endButtonGroup.gameObject.SetActive(true);
         endButtonGroup.EndShowButton();
         currentScore.GameOverDirect();

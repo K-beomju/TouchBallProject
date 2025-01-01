@@ -23,8 +23,6 @@ public class Ball : MonoBehaviour
     public bool isRotate = true;        // 처음 로테이션 제어 
     public bool isRetry = false;        // 리트라이를 했는지 안했는지 판별
     public bool isDone = false;         // 리트라이 했는지 판별하여 게임 종료
-    public bool isDragShot = false;
-    public bool LockDrag = true;
 
     [SerializeField] private Ease ease;
 
@@ -53,33 +51,16 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        if (IsPointerOverUIObject()) return;
-
-        if(!LockDrag)
-        if (!isDragShot && !isStart)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                startPoint = mainCam.ScreenToWorldPoint(Input.mousePosition);
-                startPoint.z = 15;
-            }
-
-            if (Input.GetMouseButton(0))
-            {
-                currentPoint = mainCam.ScreenToWorldPoint(Input.mousePosition);
-                currentPoint.z = 15;
-
-                if (IsDrag() && !isDragShot)
-                    dragLine.RenderLine(startPoint, currentPoint);
-            }
-        }
-
-
-
-
+        if (IsPointerOverUIObject() || UiManager.Instance.ShowPopup) return;
 
         if (Input.GetMouseButtonUp(0) || Input.GetKeyDown(KeyCode.Space))
         {
+             // 마우스 클릭 위치를 화면 좌표에서 월드 좌표로 변환
+        Vector3 touchPosition = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        touchPosition.z = 0; // 2D 공간에서 Z 축 제거
+
+        // 화면 하단(세로축 절반 이하)에서 터치한 경우 리턴
+        if (Input.mousePosition.y > Screen.height / 2) return;
             if (isStart)
             {
                 isStart = false;
@@ -105,22 +86,6 @@ public class Ball : MonoBehaviour
 
             endPoint = mainCam.ScreenToWorldPoint(Input.mousePosition);
             endPoint.z = 15;
-
-
-            if(!LockDrag)
-            if (IsDrag())
-            {
-                if (!isDragShot && !isStart)
-                {
-                    SoundManager.Instance.PlayFXSound("SlingShot");
-                    UiManager.Instance.dragLineGroup.ReloadDrag();
-                    force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x),
-                                        Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y));
-                    rb.AddForce(force * power, ForceMode2D.Impulse);
-                    dragLine.EndPoint();
-                }
-            }
-          
 
 
         }

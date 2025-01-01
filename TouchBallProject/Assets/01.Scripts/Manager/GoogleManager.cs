@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using GooglePlayGames;
 
-public class GoogleManager : MonoBehaviour
+public class GoogleManager : MonoSingleton<GoogleManager>
 {
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         #if UNITY_ANDROID
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();

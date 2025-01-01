@@ -41,7 +41,20 @@ public class InterstitialRetryPopup : MonoBehaviour
     {
         retryButton.interactable = false;
         isRetry = true;
-        //AdManager.Instance.ShowInterstitialAd(() => RetryGame());
+        AdManager.Instance.ShowRewardedInterstitialAd((onRewardEarend) =>
+        {
+            StartCoroutine(AdManager.Instance.ExecuteAfterFrame(() =>
+            {
+                if (onRewardEarend)
+                {
+                    RetryGame();
+                }
+                else
+                {
+
+                }
+            }));
+        });
     }
 
     public void RetryGame()
