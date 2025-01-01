@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using GooglePlayGames;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class DataManager : MonoSingleton<DataManager>
 {
@@ -47,7 +49,6 @@ public class DataManager : MonoSingleton<DataManager>
             BestScore = SecurityPlayerPrefs.GetInt("bestScore", default);
         if (SecurityPlayerPrefs.HasKey("star"))
             Star = SecurityPlayerPrefs.GetInt("star", default);
-        //leaderBoard = GetComponent<LeaderBoard>();
     }
 
     public void CurrentAddScore(int value = 1)
@@ -75,16 +76,29 @@ public class DataManager : MonoSingleton<DataManager>
             {
                 BestScore = CurrentScore;
                 SecurityPlayerPrefs.SetInt("bestScore", BestScore);
-                ///leaderBoard.AddLeaderboard(BestScore);
             }
         }
         else
         {
             BestScore = CurrentScore;
             SecurityPlayerPrefs.SetInt("bestScore", BestScore);
-            //leaderBoard.AddLeaderboard(BestScore);
         }
 
-        SecurityPlayerPrefs.SetInt("star", Star);
+        PlayGamesPlatform.Instance.ReportScore(BestScore, GPGSIds.leaderboard_ranking, (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log("Leader Good");
+            }
+        });
+
+
+    SecurityPlayerPrefs.SetInt("star", Star);
     }
+
+    public void ShowLeaderBoadrdUI()
+    {
+        PlayGamesPlatform.Instance.ShowLeaderboardUI(GPGSIds.leaderboard_ranking);
+    }
+
 }

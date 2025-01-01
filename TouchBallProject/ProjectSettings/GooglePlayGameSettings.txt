@@ -1,9 +1,9 @@
-lastUpgrade=01101
-proj.pluginVersion=0.11.01
-proj.AppId=243678267192
-and.BundleId=com.Happyhops.HighEarth
+lastUpgrade=20000
+proj.pluginVersion=2.0.0
+proj.AppId=256081239641
+and.BundleId=com.LukeDogCompany.HighEarth
 proj.classDir=Assets
 proj.ConstantsClassName=GPGSIds
-and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--Google+Play+game+services+IDs.+Save+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.--%3e%0d%0a%3cresources%3e%0d%0a++%3c%21--app_id--%3e%0d%0a++%3cstring+name%3d%22app_id%22+translatable%3d%22false%22%3e243678267192%3c%2fstring%3e%0d%0a++%3c%21--package_name--%3e%0d%0a++%3cstring+name%3d%22package_name%22+translatable%3d%22false%22%3ecom.Happyhops.HighEarth%3c%2fstring%3e%0d%0a++%3c%21--leaderboard+Ranking--%3e%0d%0a++%3cstring+name%3d%22leaderboard_ranking%22+translatable%3d%22false%22%3eCgkIuI7t4osHEAIQAA%3c%2fstring%3e%0d%0a%3c%2fresources%3e
-and.ClientId=243678267192-3jmqeq5o1r48amf0rnjcq6r2i3thnntl.apps.googleusercontent.com
+and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--Google+Play+game+services+IDs.+Save+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.--%3e%0d%0a%3cresources%3e%0d%0a++%3c%21--app_id--%3e%0d%0a++%3cstring+name%3d%22app_id%22+translatable%3d%22false%22%3e256081239641%3c%2fstring%3e%0d%0a++%3c%21--package_name--%3e%0d%0a++%3cstring+name%3d%22package_name%22+translatable%3d%22false%22%3ecom.LukeDogCompany.HighEarth%3c%2fstring%3e%0d%0a++%3c%21--leaderboard+Ranking--%3e%0d%0a++%3cstring+name%3d%22leaderboard_ranking%22+translatable%3d%22false%22%3eCgkI2byG_bkHEAIQAQ%3c%2fstring%3e%0d%0a%3c%2fresources%3e
+and.ClientId=256081239641-2vf5ruap5qltkq7gtec1nmc77t1erk2c.apps.googleusercontent.com
 android.SetupDone=true

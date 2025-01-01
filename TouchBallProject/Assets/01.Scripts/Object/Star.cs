@@ -24,6 +24,11 @@ public class Star : MonoBehaviour
 
     public void GoStarPanel()
     {
+        if(DOTween.IsTweening(this))
+        {
+            DOTween.Kill(this);
+        }
+        
         transform.DOPunchScale(new Vector3(0.8f, 0.8f, 0), 0.3f, 5, 1).OnComplete(() =>
         {
             transform.DOMove(new Vector3(1.7f, 4.6f, 0), 0.5f).OnComplete(() =>

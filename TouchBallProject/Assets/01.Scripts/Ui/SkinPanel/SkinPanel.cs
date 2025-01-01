@@ -130,7 +130,7 @@ public class SkinPanel : MonoBehaviour
     public void GetRewardAd()
     {
         Debug.Log("GetRewardAd");
-        AdManager.Instance.ShowInterstitialAd(() => DataManager.Instance.AddStar(100));
+        //AdManager.Instance.ShowInterstitialAd(() => DataManager.Instance.AddStar(100));
     }
 
 
